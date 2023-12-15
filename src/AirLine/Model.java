@@ -1,6 +1,5 @@
 package AirLine;
 
-<<<<<<< HEAD
 public abstract class Model {
     private int id;
 
@@ -11,8 +10,4 @@ public abstract class Model {
     public void setId(int id) {
         this.id = id;
     }
-=======
-public class Model {
-    
->>>>>>> origin/main
 }

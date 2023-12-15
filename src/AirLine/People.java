@@ -7,5 +7,7 @@ public abstract class People extends Model {
         return name;
     }
 
-
+    public void setName(java.lang.String name) {
+        this.name = name;
+    }
 }
