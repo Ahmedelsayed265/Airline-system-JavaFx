@@ -27,5 +27,7 @@ public class Crew extends People {
         this.capitanName = capitanName;
     }
 
+    //add update - remove - assign
+
 }
 

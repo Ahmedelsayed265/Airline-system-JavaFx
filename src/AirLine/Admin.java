@@ -39,5 +39,5 @@ public class Admin extends People {
     public void register(String name, String email, String password) {
 
     }
-
+//add   bookFlight - updateFlight - displayFlight - deleteFlight
 }

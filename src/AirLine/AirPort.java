@@ -26,4 +26,6 @@ public class AirPort extends Model {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    //add display - update - delete
 }

@@ -4,37 +4,39 @@ import java.sql.Date;
 
 public class Flight extends Model {
     private static int counter;
-    private AirPort departureLocation;
-    private AirPort arrivalLocation;
+
+    private AirPort departureAirPort;
+
+    private AirPort arrivalAirPort;
     private Date departureTime;
     private Date arrivalTime;
     private AirCraft airCraft;
     private int availableSeats;
 
-    public Flight(AirPort departureLocation, AirPort arrivalLocation, Date departureTime, Date arrivalTime, AirCraft airCraft, int availableSeats) {
+    public Flight(AirPort departureAirPort, AirPort arrivalAirPort, Date departureTime, Date arrivalTime, AirCraft airCraft, int availableSeats) {
         super(++counter);
-        this.departureLocation = departureLocation;
-        this.arrivalLocation = arrivalLocation;
+        this.departureAirPort = departureAirPort;
+        this.arrivalAirPort = arrivalAirPort;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.airCraft = airCraft;
         this.availableSeats = availableSeats;
     }
 
-    public AirPort getDepartureLocation() {
-        return departureLocation;
+    public AirPort getDepartureAirPort() {
+        return departureAirPort;
     }
 
-    public void setDepartureLocation(AirPort departureLocation) {
-        this.departureLocation = departureLocation;
+    public void setDepartureAirPort(AirPort departureAirPort) {
+        this.departureAirPort = departureAirPort;
     }
 
-    public AirPort getArrivalLocation() {
-        return arrivalLocation;
+    public AirPort getArrivalAirPort() {
+        return arrivalAirPort;
     }
 
-    public void setArrivalLocation(AirPort arrivalLocation) {
-        this.arrivalLocation = arrivalLocation;
+    public void setArrivalAirPort(AirPort arrivalAirPort) {
+        this.arrivalAirPort = arrivalAirPort;
     }
 
     public Date getDepartureTime() {
@@ -69,8 +71,5 @@ public class Flight extends Model {
         this.availableSeats = availableSeats;
     }
 
-    public void display(){
-        // return flight info by id from database
-    }
-
+  //add display - update - delete
 }
