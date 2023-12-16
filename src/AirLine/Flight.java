@@ -71,5 +71,5 @@ public class Flight extends Model {
         this.availableSeats = availableSeats;
     }
 
-  //add display - update - delete
+    // add display - update - delete
 }
