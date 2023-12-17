@@ -9,7 +9,7 @@ public class DB {
     public static Connection connector() {
         Connection con = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/airline+system", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/airline_system", "root", "");
             JOptionPane.showMessageDialog(null, "Connection succeeded");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Connection error: " + e.getMessage());
