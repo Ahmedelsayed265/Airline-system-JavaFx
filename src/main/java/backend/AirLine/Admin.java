@@ -36,7 +36,6 @@ public class Admin extends People {
     }
 
     public static void login(String email, String password) {
-        DatabaseMetaData DatabaseConnector = null;
         try (Connection connection = DatabaseConnector.getConnection()) {
             String query = "SELECT * FROM Admins WHERE email = ? AND password = ?";
             try (PreparedStatement ps = connection.prepareStatement(query)) {
