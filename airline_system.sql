@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2023 at 07:15 PM
+-- Generation Time: Dec 17, 2023 at 11:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `airline system`
+-- Database: `airline_system`
 --
 
 -- --------------------------------------------------------
@@ -40,7 +40,10 @@ CREATE TABLE `admins` (
 
 INSERT INTO `admins` (`id`, `name`, `email`, `password`) VALUES
 (1, 'Abdelrahman Osama', 'AbdoSamy315@gmail.com', '123456'),
-(2, 'admin', 'admin@admin.com', 'test1234');
+(2, 'admin', 'admin@admin.com', 'test1234'),
+(3, 'Ahmed', 'ae290084@gmail.com', '123456'),
+(4, 'tarek', 'tarekGamal@gmail.com', 'test12345'),
+(5, 'Nader', 'nader@yahoo.com', '54321');
 
 -- --------------------------------------------------------
 
@@ -175,15 +178,17 @@ CREATE TABLE `payments` (
   `ticket_id` int(255) NOT NULL,
   `customer_id` int(255) NOT NULL,
   `payTime` date NOT NULL,
-  `method` varchar(255) NOT NULL
+  `method` varchar(255) NOT NULL,
+  `ticketsCount` int(255) NOT NULL,
+  `totalPrice` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `payments`
 --
 
-INSERT INTO `payments` (`id`, `ticket_id`, `customer_id`, `payTime`, `method`) VALUES
-(1, 1, 1, '2023-03-22', 'Visa');
+INSERT INTO `payments` (`id`, `ticket_id`, `customer_id`, `payTime`, `method`, `ticketsCount`, `totalPrice`) VALUES
+(1, 1, 1, '2023-03-22', 'Visa', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -338,7 +343,7 @@ ALTER TABLE `tickets`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `aircrafts`
