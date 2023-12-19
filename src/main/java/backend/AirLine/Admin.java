@@ -2,16 +2,32 @@ package backend.AirLine;
 
 import java.sql.*;
 
-public class Admin extends People {
+public class Admin extends Model {
     private static int counter;
+    private String name;
     private String emailAddress;
     private static boolean login;
+    private static boolean register;
     private String password;
 
+
     public Admin(String name, String emailAddress, String password) {
-        super(++counter, name);
+        super(++counter);
+        this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;
+    }
+
+    public Admin() {
+        super(++counter);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmailAddress() {
@@ -31,11 +47,11 @@ public class Admin extends People {
     }
 
     /* -------- Start Login Methods -------- */
-    public static boolean isLoggedIn() {
+    public boolean isLoggedIn() {
         return login;
     }
 
-    public static void login(String email, String password) {
+    public void login(String email, String password) {
         try (Connection connection = DatabaseConnector.getConnection()) {
             String query = "SELECT * FROM Admins WHERE email = ? AND password = ?";
             try (PreparedStatement ps = connection.prepareStatement(query)) {
@@ -52,47 +68,19 @@ public class Admin extends People {
     /* -------- end Login Methods -------- */
 
     /* -------- Start Register Methods -------- */
-
-    private static boolean isEmailExists(Connection connection, String email) throws SQLException {
-        String query = "SELECT COUNT(*) FROM Admins WHERE email = ?";
-        try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, email);
-            try (ResultSet resultSet = ps.executeQuery()) {
-                if (resultSet.next()) {
-                    int count = resultSet.getInt(1);
-                    return count > 0;
-                }
-            }
-        }
-        return false;
-    }
-
-    private static boolean isValidEmail(String email) {
-        return email != null && email.contains("@");
-    }
-
-    public static void register(String name, String email, String password) {
-        if (!isValidEmail(email)) {
-            System.out.println("Invalid email address");
-            return;
-        }
+    public void register(String name, String email, String password) {
         try (Connection connection = DatabaseConnector.getConnection()) {
-            if (isEmailExists(connection, email)) {
-                System.out.println("Email address is already registered");
-                return;
-            }
-            // String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
             String query = "INSERT INTO Admins (name, email, password) VALUES (?, ?, ?)";
             try (PreparedStatement ps = connection.prepareStatement(query)) {
                 ps.setString(1, name);
                 ps.setString(2, email);
                 ps.setString(3, password);
-
                 ps.executeUpdate();
-                System.out.println("Hello " + name + ", your account registered successfully");
+                register = true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            register = false;
         }
     }
     /* -------- end Register Methods -------- */

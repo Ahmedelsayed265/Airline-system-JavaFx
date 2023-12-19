@@ -4,6 +4,6 @@ module com.example.airlinesystem {
     requires java.sql;
 
 
-    opens login to javafx.fxml;
-    exports login;
+    opens App to javafx.fxml;
+    exports App;
 }

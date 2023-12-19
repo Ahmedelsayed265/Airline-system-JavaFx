@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="560" prefWidth="750" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="App.RegisterController">
+    <cursor>
+        <Cursor fx:constant="HAND"/>
+    </cursor>
+    <ImageView fitHeight="132.0" fitWidth="132.0" layoutX="496.0" layoutY="14.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../images/logo.png"/>
+    </ImageView>
+    <Label layoutX="392.0" layoutY="286.0" text="Email Address*"/>
+    <TextField fx:id="emailInput" layoutX="391.0" layoutY="312.0" prefHeight="40.0" prefWidth="343.0"
+               promptText="example: mail@mail.com"/>
+    <Label fx:id="emailRequired" layoutX="389.0" layoutY="358.0" textFill="RED" style="-fx-font-size: 12"/>
+    <Label layoutX="391.0" layoutY="375.0" text="password*"/>
+    <TextField fx:id="passwordInput" layoutX="391.0" layoutY="399.0" prefHeight="40.0" prefWidth="343.0"
+               promptText="*********"/>
+    <Label fx:id="passwordRequired" layoutX="392.0" layoutY="445.0"  textFill="RED" style="-fx-font-size: 12"/>
+    <Button layoutX="392.0" layoutY="476.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="40.0"
+            prefWidth="343.0" style="-fx-background-color: #00a4bf;" text="Create" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="16.0"/>
+        </font>
+    </Button>
+    <Hyperlink layoutX="475.0" layoutY="523.0" text="Already have an account? Login"/>
+    <ImageView fitHeight="560.0" fitWidth="405.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
+        <viewport>
+            <Rectangle2D/>
+        </viewport>
+        <Image url="@../images/bg.jpg"/>
+    </ImageView>
+    <VBox prefHeight="560.0" prefWidth="370.0" style="-fx-background-color: #00a4bf80;"/>
+    <Label layoutX="392.0" layoutY="195.0" text="Name*"/>
+    <TextField fx:id="nameInput" layoutX="391.0" layoutY="220.0" prefHeight="40.0" prefWidth="343.0"
+               promptText="Example: Ahmed Elsayed"/>
+    <Label layoutX="394.0" layoutY="152.0" text="Embark on Your Journey Create An Acccount" textFill="#080c53">
+        <font>
+            <Font name="System Bold" size="16.0"/>
+        </font>
+    </Label>
+    <Label fx:id="nameRequired" layoutX="390.0" layoutY="263.0" textFill="RED" style="-fx-font-size: 12"/>
+
+</AnchorPane>
