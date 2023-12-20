@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.PasswordField?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0"
             prefWidth="750.0" xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.LoginController">
@@ -32,7 +33,7 @@
                promptText="example: mail@mail.com"/>
     <Label fx:id="emailRequiredLabel" layoutX="392.0" layoutY="277.0" textFill="RED"/>
     <Label layoutX="391.0" layoutY="304.0" text="password*"/>
-    <TextField fx:id="passwordInput" layoutX="392.0" layoutY="329.0" prefHeight="40.0" prefWidth="343.0"
+    <PasswordField fx:id="passwordInput" layoutX="392.0" layoutY="329.0" prefHeight="40.0" prefWidth="343.0"
                promptText="*********"/>
     <Label fx:id="passwordRequiredLabel" layoutX="392.0" layoutY="375.0" textFill="RED"/>
     <Button layoutX="391.0" layoutY="421.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0"
