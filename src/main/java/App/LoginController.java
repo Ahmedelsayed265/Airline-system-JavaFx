@@ -2,8 +2,9 @@ package App;
 
 import backend.AirLine.Admin;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 public class LoginController {
     @FXML
@@ -15,7 +16,11 @@ public class LoginController {
     @FXML
     private Label passwordRequiredLabel;
 
-    @FXML
+    private Main mainApp;
+
+    public void setMain(Main mainApp) {
+        this.mainApp = mainApp;
+    }
 
     public static void infoBox(String infoMessage, String title) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -44,7 +49,7 @@ public class LoginController {
         ad.login(email, password);
 
         if (ad.isLoggedIn()) {
-            System.out.println("login success");
+            mainApp.showHomeScene();
         } else {
             infoBox("Incorrect Email OR Password", "Login Failed");
         }

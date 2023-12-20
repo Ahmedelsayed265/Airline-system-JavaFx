@@ -7,7 +7,6 @@ public class Admin extends Model {
     private String name;
     private String emailAddress;
     private static boolean login;
-    private static boolean register;
     private String password;
 
 
@@ -76,11 +75,9 @@ public class Admin extends Model {
                 ps.setString(2, email);
                 ps.setString(3, password);
                 ps.executeUpdate();
-                register = true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            register = false;
         }
     }
     /* -------- end Register Methods -------- */
