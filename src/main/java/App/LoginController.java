@@ -30,7 +30,7 @@ public class LoginController {
     }
 
     @FXML
-    protected void handleLogin() {
+    protected void handleLogin() throws Exception {
         String email = emailInput.getText();
         String password = passwordInput.getText();
 
@@ -53,5 +53,10 @@ public class LoginController {
         } else {
             infoBox("Incorrect Email OR Password", "Login Failed");
         }
+    }
+
+    @FXML
+    protected void goRegister() throws Exception {
+        mainApp.showRegisterScene();
     }
 }

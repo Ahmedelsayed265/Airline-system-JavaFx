@@ -21,7 +21,14 @@ public class RegisterController {
     private TextField passwordInput;
 
     boolean validationFailed = false;
-    public void handleRegister() {
+    private Main mainApp;
+
+    public void setMain(Main mainApp) {
+        this.mainApp = mainApp;
+    }
+
+    @FXML
+    public void handleRegister() throws Exception {
         String name = nameInput.getText();
         String email = emailInput.getText();
         String password = passwordInput.getText();
@@ -52,15 +59,23 @@ public class RegisterController {
 
         if (!validationFailed) {
             Admin ad = new Admin();
-            ad.register(name, email, password);
-            infoBox("Registration successful!", "Success");
-            validationFailed = true;
-        }
+            if (!ad.isEmailExists(email)) {
+                ad.register(name, email, password);
+                mainApp.showLoginScene();
+            } else {
+                errorBox("Email address is already exist..!", "Validation Error");
 
+            }
+        }
     }
 
-    public static void infoBox(String infoMessage, String title) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    @FXML
+    public void goLogin() throws Exception {
+        mainApp.showLoginScene();
+    }
+
+    public static void errorBox(String infoMessage, String title) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(infoMessage);
         alert.setTitle(title);
         alert.show();

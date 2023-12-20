@@ -42,7 +42,7 @@
         </font>
     </Button>
     <Hyperlink layoutX="633.0" layoutY="381.0" text="Forget password?" textFill="#00a4bf"/>
-    <Hyperlink layoutX="477.0" layoutY="486.0" text="Don't have an account? Register"/>
+    <Hyperlink layoutX="477.0" layoutY="486.0" text="Don't have an account? Register" onAction="#goRegister"/>
     <ImageView fitHeight="560.0" fitWidth="405.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
         <viewport>
             <Rectangle2D/>

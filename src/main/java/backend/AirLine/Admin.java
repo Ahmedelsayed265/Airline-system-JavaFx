@@ -3,7 +3,7 @@ package backend.AirLine;
 import java.sql.*;
 
 public class Admin extends Model {
-    private static int counter;
+    private static int counter ;
     private String name;
     private String emailAddress;
     private static boolean login;
@@ -67,6 +67,21 @@ public class Admin extends Model {
     /* -------- end Login Methods -------- */
 
     /* -------- Start Register Methods -------- */
+    public boolean isEmailExists(String email) throws Exception {
+        Connection connection = DatabaseConnector.getConnection();
+        String query = "SELECT COUNT(*) FROM Admins WHERE email = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, email);
+            try (ResultSet resultSet = ps.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count > 0;
+                }
+            }
+        }
+        return false;
+    }
+
     public void register(String name, String email, String password) {
         try (Connection connection = DatabaseConnector.getConnection()) {
             String query = "INSERT INTO Admins (name, email, password) VALUES (?, ?, ?)";
