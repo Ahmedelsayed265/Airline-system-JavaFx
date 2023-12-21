@@ -3,7 +3,7 @@ package backend.AirLine;
 import java.sql.*;
 
 public class Admin extends Model {
-    private static int counter ;
+    private static int counter;
     private String name;
     private String emailAddress;
     private static boolean login;
@@ -48,6 +48,26 @@ public class Admin extends Model {
     /* -------- Start Login Methods -------- */
     public boolean isLoggedIn() {
         return login;
+    }
+
+    public String[] whoLoggedIn(String email) {
+        if (isLoggedIn()) {
+            try (Connection connection = DatabaseConnector.getConnection()) {
+                String query = "SELECT name FROM Admins WHERE email = ?";
+                try (PreparedStatement ps = connection.prepareStatement(query)) {
+                    ps.setString(1, email);
+                    try (ResultSet res = ps.executeQuery()) {
+                        if (res.next()) {
+                            String adminName = res.getString("name");
+                            return new String[]{email, adminName};
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     public void login(String email, String password) {

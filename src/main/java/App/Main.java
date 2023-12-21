@@ -32,7 +32,7 @@ public class Main extends Application {
 
     }
 
-    public void showHomeScene() throws Exception {
+    public void showHomeScene(String adminEmail, String adminName) throws Exception {
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("Home-view.fxml"));
         Scene scene = new Scene(loader.load(), 750, 560);
@@ -42,7 +42,7 @@ public class Main extends Application {
 
         HomeController controller = loader.getController();
         controller.setMain(this);
-
+        controller.setAdminInfo(adminEmail, adminName);
         primaryStage.show();
 
     }

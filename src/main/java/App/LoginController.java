@@ -16,8 +16,9 @@ public class LoginController {
     private Label emailRequiredLabel;
     @FXML
     private Label passwordRequiredLabel;
-
     private Main mainApp;
+    public String adminEmail;
+    public String adminName;
 
     public void setMain(Main mainApp) {
         this.mainApp = mainApp;
@@ -50,7 +51,12 @@ public class LoginController {
         ad.login(email, password);
 
         if (ad.isLoggedIn()) {
-            mainApp.showHomeScene();
+
+            String[] userInfo = ad.whoLoggedIn(email);
+            adminEmail = userInfo[0];
+            adminName = userInfo[1];
+            mainApp.showHomeScene(adminEmail, adminName);
+
         } else {
             infoBox("Incorrect Email OR Password", "Login Failed");
         }
