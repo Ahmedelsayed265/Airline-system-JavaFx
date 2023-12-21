@@ -19,6 +19,7 @@ public class LoginController {
     private Main mainApp;
     public String adminEmail;
     public String adminName;
+    boolean validationFailed = false;
 
     public void setMain(Main mainApp) {
         this.mainApp = mainApp;
@@ -38,11 +39,13 @@ public class LoginController {
 
         if (email == null || email.trim().isEmpty()) {
             emailRequiredLabel.setText("Email address is required*");
+            validationFailed = true;
         } else {
             emailRequiredLabel.setText("");
         }
         if (password == null || password.trim().isEmpty()) {
             passwordRequiredLabel.setText("Password is required*");
+            validationFailed = true;
         } else {
             passwordRequiredLabel.setText("");
         }
@@ -57,7 +60,7 @@ public class LoginController {
             adminName = userInfo[1];
             mainApp.showHomeScene(adminEmail, adminName);
 
-        } else {
+        } else if (!validationFailed) {
             infoBox("Incorrect Email OR Password", "Login Failed");
         }
     }
