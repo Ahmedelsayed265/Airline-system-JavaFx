@@ -1,21 +1,31 @@
 package App;
 
+import backend.AirLine.AirPort;
 import backend.AirLine.Flight;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class FlightsController {
     @FXML
     private Label adminNameLabel, adminEmailLabel, seats;
     @FXML
+    private Label arrAirportSelected, depAirportSelected, aircraftSelected, depTimeRequired, arrTimeRequired;
+    @FXML
     private ComboBox<String> depAirports, arrAirports, airCraftsNames;
+    @FXML
+    private DatePicker depTime, arrTime;
     private Main mainApp;
     public String adName, adEmail;
+    private boolean v1, v2, v3, v4, v5;
+    private int cap;
 
     public void setMain(Main main) {
         this.mainApp = main;
@@ -72,8 +82,81 @@ public class FlightsController {
 
     @FXML
     public void getCapacity() throws Exception {
-        int cap = Flight.getAircraftCapacity(airCraftsNames.getValue());
+        cap = Flight.getAircraftCapacity(airCraftsNames.getValue());
         seats.setText(String.valueOf(cap));
     }
 
+    @FXML
+    public void addFlight() throws Exception {
+        String depAirport = depAirports.getValue();
+        String arrAirport = arrAirports.getValue();
+        String aircraftName = airCraftsNames.getValue();
+        Date depDate = (depTime.getValue() != null) ? Date.valueOf(depTime.getValue()) : null;
+        Date arrDate = (arrTime.getValue() != null) ? Date.valueOf(arrTime.getValue()) : null;
+
+        if (depAirport == null) {
+            depAirportSelected.setText("Departure airport must be selected*");
+            v1 = false;
+        } else {
+            depAirportSelected.setText("");
+            v1 = true;
+        }
+        if (arrAirport == null) {
+            arrAirportSelected.setText("Arrival airport must be selected*");
+            v2 = false;
+        } else {
+            arrAirportSelected.setText("");
+            v2 = true;
+        }
+        if (aircraftName == null) {
+            aircraftSelected.setText("Aircraft must be selected*");
+            v3 = false;
+        } else {
+            aircraftSelected.setText("");
+            v3 = true;
+        }
+        if (depDate == null) {
+            depTimeRequired.setText("Departure time is required*");
+            v4 = false;
+        } else {
+            depTimeRequired.setText("");
+            v4 = true;
+        }
+        if (arrDate == null) {
+            arrTimeRequired.setText("Arrival time is required*");
+            v5 = false;
+        } else {
+            arrTimeRequired.setText("");
+            v5 = true;
+        }
+
+        if (v1 && v2 && v3 && v4 && v5) {
+            //assert depAirport != null;
+            if (depAirport.equals(arrAirport)) {
+                errorBox("You can't choose same value for departure airport and arrival airport ", "Error");
+            } else {
+                Flight flight = new Flight(depAirport, arrAirport, depDate, arrDate, aircraftName, cap);
+                infoBox("Flight Added Successfully", "Success");
+                depAirports.setValue(null);
+                arrAirports.setValue(null);
+                airCraftsNames.setValue(null);
+                depTime.setValue(null);
+                arrTime.setValue(null);
+            }
+        }
+    }
+
+    public static void infoBox(String infoMessage, String title) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText(infoMessage);
+        alert.setTitle(title);
+        alert.show();
+    }
+
+    public static void errorBox(String infoMessage, String title) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText(infoMessage);
+        alert.setTitle(title);
+        alert.show();
+    }
 }

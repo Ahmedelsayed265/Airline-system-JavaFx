@@ -149,7 +149,7 @@
         <children>
             <Label layoutX="11.0" layoutY="57.0" text="Departure Airport*" />
             <Label layoutX="272.0" layoutY="57.0" text="Arrival Airport*" />
-            <Button layoutX="408.0" layoutY="306.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #00a4bf;" text="Add" textFill="WHITE">
+            <Button layoutX="408.0" layoutY="306.0" mnemonicParsing="false" onAction="#addFlight" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #00a4bf;" text="Add" textFill="WHITE">
                 <font>
                     <Font name="System Bold" size="14.0" />
                 </font>
@@ -162,11 +162,9 @@
                     <Font name="System Bold" size="24.0" />
                 </font>
             </Label>
-            <Label fx:id="nameRequiredLabel" layoutX="14.0" layoutY="98.0" textFill="RED" />
-            <Label fx:id="locationRequiredLabel" layoutX="11.0" layoutY="184.0" textFill="RED" />
-            <DatePicker layoutX="12.0" layoutY="160.0" prefHeight="40.0" prefWidth="242.0" />
+            <DatePicker fx:id="depTime" layoutX="12.0" layoutY="160.0" prefHeight="40.0" prefWidth="242.0" />
             <Label layoutX="11.0" layoutY="143.0" text="Departure Time*" />
-            <DatePicker layoutX="266.0" layoutY="160.0" prefHeight="40.0" prefWidth="242.0" />
+            <DatePicker fx:id="arrTime" layoutX="266.0" layoutY="160.0" prefHeight="40.0" prefWidth="242.0" />
             <Label layoutX="266.0" layoutY="143.0" text="Arrival Time*" />
             <Label layoutX="11.0" layoutY="229.0" text="Air Craft*" />
             <Label layoutX="271.0" layoutY="261.0" text="Available Seats:">
@@ -181,11 +179,12 @@
             </Label>
             <ComboBox fx:id="depAirports" layoutX="12.0" layoutY="78.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="242.0" promptText="Enter airport" style="-fx-background-color: #f4f4f4;" />
             <ComboBox fx:id="arrAirports" layoutX="266.0" layoutY="78.0" prefHeight="40.0" prefWidth="242.0" promptText="Enter airport" style="-fx-background-color: #f4f4f4;" />
-            <Label layoutX="14.0" layoutY="118.0" prefHeight="18.0" prefWidth="0.0" textFill="RED" />
-            <Label layoutX="11.0" layoutY="200.0" prefHeight="18.0" prefWidth="0.0" textFill="RED" />
-            <Label layoutX="266.0" layoutY="118.0" prefHeight="18.0" prefWidth="0.0" textFill="RED" />
-            <Label layoutX="266.0" layoutY="200.0" prefHeight="18.0" prefWidth="0.0" textFill="RED" />
+            <Label fx:id="depAirportSelected" layoutX="14.0" layoutY="118.0" prefHeight="18.0"  textFill="RED" />
+            <Label fx:id="depTimeRequired" layoutX="11.0" layoutY="200.0" prefHeight="18.0"  textFill="RED" />
+            <Label fx:id="arrAirportSelected" layoutX="266.0" layoutY="118.0" prefHeight="18.0"  textFill="RED" />
+            <Label fx:id="arrTimeRequired" layoutX="266.0" layoutY="200.0" prefHeight="18.0"  textFill="RED" />
             <ComboBox fx:id="airCraftsNames" layoutX="12.0" layoutY="249.0" onAction="#getCapacity" prefHeight="40.0" prefWidth="242.0" promptText="enter air craft" style="-fx-background-color: #f4f4f4;" />
+         <Label fx:id="aircraftSelected" layoutX="12.0" layoutY="296.0" textFill="RED" />
         </children>
         <cursor>
             <Cursor fx:constant="DEFAULT" />
