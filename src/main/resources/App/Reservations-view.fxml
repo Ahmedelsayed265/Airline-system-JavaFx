@@ -142,4 +142,13 @@
         </Label>
         <Label fx:id="adminEmailLabel" layoutX="14.0" layoutY="529.0" text="ahmedelsayed@icloud.com" textFill="#00a4bf" />
     </AnchorPane>
+   <AnchorPane layoutX="216.0" layoutY="14.0" prefHeight="181.0" prefWidth="520.0" style="-fx-background-color: #fff; -fx-background-radius: 4px;" AnchorPane.leftAnchor="215.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+      <children>
+         <Label layoutX="167.0" layoutY="14.0" text="Add Reservation" textFill="#080c53">
+            <font>
+               <Font name="System Bold" size="24.0" />
+            </font>
+         </Label>
+      </children>
+   </AnchorPane>
 </AnchorPane>

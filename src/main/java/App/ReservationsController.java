@@ -41,10 +41,7 @@ public class ReservationsController {
         mainApp.showFlightsScene();
     }
     @FXML
-    public void goCrows() throws Exception {
+    public void goCrews() throws Exception {
         mainApp.showCrewsScene();
     }
-
-
-
 }
