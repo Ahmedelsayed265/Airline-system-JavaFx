@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2023 at 11:22 PM
+-- Generation Time: Dec 22, 2023 at 10:45 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,11 +39,9 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `password`) VALUES
-(1, 'Abdelrahman Osama', 'AbdoSamy315@gmail.com', '123456'),
-(2, 'admin', 'admin@admin.com', 'test1234'),
-(3, 'Ahmed', 'ae290084@gmail.com', '123456'),
-(4, 'tarek', 'tarekGamal@gmail.com', 'test12345'),
-(5, 'Nader', 'nader@yahoo.com', '54321');
+(1, 'admin', 'admin@admin.com', '123456'),
+(2, 'Ahmed Elsayed', 'ahmedelsayed@icloud.com', 'test1234'),
+(3, 'Abd Elrahman', 'AbdoSamy@gmail.com', '123456');
 
 -- --------------------------------------------------------
 
@@ -63,7 +61,9 @@ CREATE TABLE `aircrafts` (
 
 INSERT INTO `aircrafts` (`id`, `type`, `capacity`) VALUES
 (1, 'Boeing 747 ', 416),
-(2, 'Embraer E190', 457);
+(2, 'Embraer E190', 457),
+(3, 'LS234', 450),
+(4, 'Boenng67', 679);
 
 -- --------------------------------------------------------
 
@@ -83,7 +83,8 @@ CREATE TABLE `airports` (
 
 INSERT INTO `airports` (`id`, `name`, `location`) VALUES
 (1, 'Cairo International Airport', 'Cairo - Egypt'),
-(2, ' Aéroport Paris-Charles-de-Gaulle', 'Paris - France');
+(2, ' Aéroport Paris-Charles-de-Gaulle', 'Paris - France'),
+(3, 'Elsaloum', 'Elsaloum Egypt');
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,6 @@ INSERT INTO `airports` (`id`, `name`, `location`) VALUES
 CREATE TABLE `crews` (
   `id` int(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `flight_id` int(255) NOT NULL,
   `captainName` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -102,8 +102,8 @@ CREATE TABLE `crews` (
 -- Dumping data for table `crews`
 --
 
-INSERT INTO `crews` (`id`, `name`, `flight_id`, `captainName`) VALUES
-(1, 'ducks', 1, 'Ahmed Elsayed');
+INSERT INTO `crews` (`id`, `name`, `captainName`) VALUES
+(1, 'ducks', 'Ahmed Elsayed');
 
 -- --------------------------------------------------------
 
@@ -137,6 +137,7 @@ CREATE TABLE `flights` (
   `departureTime` date NOT NULL,
   `arrivalTime` date NOT NULL,
   `airCraftId` int(255) NOT NULL,
+  `crew_id` int(255) NOT NULL,
   `availableSeats` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -144,8 +145,8 @@ CREATE TABLE `flights` (
 -- Dumping data for table `flights`
 --
 
-INSERT INTO `flights` (`id`, `departureAirport_id`, `arrivalAirport_id`, `departureTime`, `arrivalTime`, `airCraftId`, `availableSeats`) VALUES
-(1, 1, 2, '2023-04-17', '2023-04-18', 1, 415);
+INSERT INTO `flights` (`id`, `departureAirport_id`, `arrivalAirport_id`, `departureTime`, `arrivalTime`, `airCraftId`, `crew_id`, `availableSeats`) VALUES
+(3, 1, 2, '2023-12-05', '2023-12-12', 1, 1, 416);
 
 -- --------------------------------------------------------
 
@@ -183,13 +184,6 @@ CREATE TABLE `payments` (
   `totalPrice` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `payments`
---
-
-INSERT INTO `payments` (`id`, `ticket_id`, `customer_id`, `payTime`, `method`, `ticketsCount`, `totalPrice`) VALUES
-(1, 1, 1, '2023-03-22', 'Visa', 0, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -203,13 +197,6 @@ CREATE TABLE `reservations` (
   `seatNumber` int(255) NOT NULL,
   `reservationTime` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `reservations`
---
-
-INSERT INTO `reservations` (`id`, `admin_id`, `flight_id`, `seatNumber`, `reservationTime`) VALUES
-(1, 2, 1, 56, '2023-03-21');
 
 -- --------------------------------------------------------
 
@@ -246,13 +233,6 @@ CREATE TABLE `tickets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tickets`
---
-
-INSERT INTO `tickets` (`id`, `reservation_id`, `customer_id`, `price`, `paymentStatus`) VALUES
-(1, 1, 1, 35.5, 1);
-
---
 -- Indexes for dumped tables
 --
 
@@ -260,7 +240,8 @@ INSERT INTO `tickets` (`id`, `reservation_id`, `customer_id`, `price`, `paymentS
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `aircrafts`
@@ -278,8 +259,7 @@ ALTER TABLE `airports`
 -- Indexes for table `crews`
 --
 ALTER TABLE `crews`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `flightId` (`flight_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `customers`
@@ -294,7 +274,8 @@ ALTER TABLE `flights`
   ADD PRIMARY KEY (`id`),
   ADD KEY `flights_ibfk_1` (`airCraftId`),
   ADD KEY `flights_ibfk_2` (`departureAirport_id`),
-  ADD KEY `flights_ibfk_3` (`arrivalAirport_id`);
+  ADD KEY `flights_ibfk_3` (`arrivalAirport_id`),
+  ADD KEY `crew_id` (`crew_id`);
 
 --
 -- Indexes for table `notifications`
@@ -343,19 +324,19 @@ ALTER TABLE `tickets`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `aircrafts`
 --
 ALTER TABLE `aircrafts`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `airports`
 --
 ALTER TABLE `airports`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `crews`
@@ -373,7 +354,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `flights`
 --
 ALTER TABLE `flights`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -410,18 +391,13 @@ ALTER TABLE `tickets`
 --
 
 --
--- Constraints for table `crews`
---
-ALTER TABLE `crews`
-  ADD CONSTRAINT `crews_ibfk_1` FOREIGN KEY (`flight_id`) REFERENCES `flights` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `flights`
 --
 ALTER TABLE `flights`
   ADD CONSTRAINT `flights_ibfk_1` FOREIGN KEY (`airCraftId`) REFERENCES `aircrafts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `flights_ibfk_2` FOREIGN KEY (`departureAirport_id`) REFERENCES `airports` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `flights_ibfk_3` FOREIGN KEY (`arrivalAirport_id`) REFERENCES `airports` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `flights_ibfk_3` FOREIGN KEY (`arrivalAirport_id`) REFERENCES `airports` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `flights_ibfk_4` FOREIGN KEY (`crew_id`) REFERENCES `crews` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `notifications`

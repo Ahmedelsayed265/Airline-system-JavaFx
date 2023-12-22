@@ -62,7 +62,7 @@ public class FlightsController {
 
     @FXML
     public void goCrews() throws Exception {
-        mainApp.showFlightsScene();
+        mainApp.showCrewsScene();
     }
 
     @FXML

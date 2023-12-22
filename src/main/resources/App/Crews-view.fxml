@@ -146,11 +146,11 @@
     </AnchorPane>
     <AnchorPane layoutX="210.0" layoutY="23.0" prefHeight="192.0" prefWidth="520.0" style="-fx-background-color: #fff; -fx-background-radius: 4px;" AnchorPane.leftAnchor="215.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
         <children>
-            <TextField fx:id="type" layoutX="12.0" layoutY="80.0" prefHeight="40.0" prefWidth="242.0" promptText="Enter AirportName" />
+            <TextField fx:id="crewName" layoutX="12.0" layoutY="80.0" prefHeight="40.0" prefWidth="242.0" promptText="Enter crew name" />
             <Label layoutX="12.0" layoutY="58.0" text="Crew Name*" />
             <Label layoutX="266.0" layoutY="58.0" text="Captain Name*" />
-            <TextField fx:id="capacity" layoutX="266.0" layoutY="80.0" prefHeight="40.0" prefWidth="242.0" promptText="Enter Airport Location" />
-            <Button layoutX="408.0" layoutY="138.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #00a4bf;" text="Add" textFill="WHITE">
+            <TextField fx:id="captainName" layoutX="266.0" layoutY="80.0" prefHeight="40.0" prefWidth="242.0" promptText="Enter captain name" />
+            <Button layoutX="408.0" layoutY="138.0" mnemonicParsing="false" onAction="#addCrew" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #00a4bf;" text="Add" textFill="WHITE">
                 <font>
                     <Font name="System Bold" size="14.0" />
                 </font>
@@ -161,8 +161,8 @@
                 <font>
                     <Font name="System Bold" size="24.0" />
                 </font></Label>
-            <Label fx:id="typeRequired" layoutX="12.0" layoutY="120.0" textFill="RED" />
-            <Label fx:id="capacityRequired" layoutX="284.0" layoutY="120.0" textFill="RED" />
+            <Label fx:id="crewRequired" layoutX="12.0" layoutY="120.0" textFill="RED" />
+            <Label fx:id="captainRequired" layoutX="266.0" layoutY="120.0" textFill="RED" />
         </children>
         <cursor>
             <Cursor fx:constant="DEFAULT" />

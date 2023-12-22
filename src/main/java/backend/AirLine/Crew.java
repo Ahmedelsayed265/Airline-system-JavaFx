@@ -1,6 +1,9 @@
 package backend.AirLine;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Crew extends People {
@@ -10,6 +13,17 @@ public class Crew extends People {
     public Crew(String name, String capitanName) {
         super(++counter, name);
         this.capitanName = capitanName;
+
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String query = "INSERT INTO crews (name, captainName) VALUES (?, ?)";
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setString(1, name);
+                ps.setString(2, capitanName);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getCapitanName() {
