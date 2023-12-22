@@ -1,11 +1,19 @@
 package App;
 
+import backend.AirLine.Flight;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+
+import java.util.ArrayList;
 
 public class FlightsController {
     @FXML
-    private Label adminNameLabel, adminEmailLabel;
+    private Label adminNameLabel, adminEmailLabel, seats;
+    @FXML
+    private ComboBox<String> depAirports, arrAirports, airCraftsNames;
     private Main mainApp;
     public String adName, adEmail;
 
@@ -40,4 +48,32 @@ public class FlightsController {
     public void goAirCrafts() throws Exception {
         mainApp.showAirCraftsScene();
     }
+
+    @FXML
+    public void initialize() throws Exception {
+        airPortsNames();
+        airCraftsNames();
+    }
+
+    @FXML
+    public void airPortsNames() throws Exception {
+        ArrayList<String> airports = Flight.fetchAirportsNames();
+        ObservableList<String> comboBoxItems = FXCollections.observableArrayList(airports);
+        depAirports.setItems(comboBoxItems);
+        arrAirports.setItems(comboBoxItems);
+    }
+
+    @FXML
+    public void airCraftsNames() throws Exception {
+        ArrayList<String> airCrafts = Flight.fetchAirCraftsNames();
+        ObservableList<String> comboBoxItems = FXCollections.observableArrayList(airCrafts);
+        airCraftsNames.setItems(comboBoxItems);
+    }
+
+    @FXML
+    public void getCapacity() throws Exception {
+        int cap = Flight.getAircraftCapacity(airCraftsNames.getValue());
+        seats.setText(String.valueOf(cap));
+    }
+
 }

@@ -1,8 +1,6 @@
 package backend.AirLine;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DatabaseConnector {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/airline_system";
@@ -11,5 +9,10 @@ public class DatabaseConnector {
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DB_URL, USER, PASSWORD);
+    }
+    public static ResultSet fetchData(String query) throws Exception {
+        Connection connection = getConnection();
+        Statement stmt = connection.createStatement();
+        return stmt.executeQuery(query);
     }
 }

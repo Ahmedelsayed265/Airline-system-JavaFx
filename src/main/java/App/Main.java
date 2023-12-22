@@ -15,7 +15,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-        showLoginScene();
+        //---------------//
+        showHomeScene("ahmed@admin.com" , "ahmed");
     }
 
     private FXMLLoader sceneShow(String nameView, String stageTitle) throws IOException {

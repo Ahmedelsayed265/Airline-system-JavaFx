@@ -1,6 +1,9 @@
 package backend.AirLine;
 
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Flight extends Model {
     private static int counter;
@@ -71,5 +74,34 @@ public class Flight extends Model {
         this.availableSeats = availableSeats;
     }
 
-    // add display - update - delete
+    public static ArrayList<String> fetchAirportsNames() throws Exception {
+        ArrayList<String> airportNames = new ArrayList<>();
+        String query = "SELECT name FROM Airports";
+        ResultSet resultSet = DatabaseConnector.fetchData(query);
+        while (resultSet.next()) {
+            String airportName = resultSet.getString("name");
+            airportNames.add(airportName);
+        }
+        return airportNames;
+    }
+
+    public static ArrayList<String> fetchAirCraftsNames() throws Exception {
+        ArrayList<String> airCraftsNames = new ArrayList<>();
+        String query = "SELECT type FROM Aircrafts";
+        ResultSet resultSet = DatabaseConnector.fetchData(query);
+        while (resultSet.next()) {
+            String airCraftName = resultSet.getString("type");
+            airCraftsNames.add(airCraftName);
+        }
+        return airCraftsNames;
+    }
+
+    public static int getAircraftCapacity(String type) throws Exception {
+        String query = "SELECT capacity From Aircrafts WHERE type = \"" + type + "\";";
+        ResultSet res = DatabaseConnector.fetchData(query);
+        if (res.next()) {
+            return res.getInt("capacity");
+        }
+        return 0;
+    }
 }
