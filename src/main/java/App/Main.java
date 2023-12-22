@@ -48,8 +48,8 @@ public class Main extends Application {
     public String adName, adEmail;
 
     public void showHomeScene(String adminEmail, String adminName) throws Exception {
-        adName=adminName;
-        adEmail=adminEmail;
+        adName = adminName;
+        adEmail = adminEmail;
         FXMLLoader loader = sceneShow("Home-view.fxml", "Home");
         homeController = loader.getController();
         homeController.setMain(this);
@@ -60,6 +60,14 @@ public class Main extends Application {
     public void showAirportsScene() throws Exception {
         FXMLLoader loader = sceneShow("AirPorts-view.fxml", "Airports");
         AirPortsController controller = loader.getController();
+        controller.setMain(this);
+        controller.setAdminInfo(adEmail, adName);
+        primaryStage.show();
+    }
+
+    public void showAirCraftsScene() throws Exception {
+        FXMLLoader loader = sceneShow("AirCrafts-view.fxml", "Air crafts");
+        AirCraftsController controller = loader.getController();
         controller.setMain(this);
         controller.setAdminInfo(adEmail, adName);
         primaryStage.show();
