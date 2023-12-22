@@ -82,6 +82,14 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    public void showCrewsScene() throws Exception {
+        FXMLLoader loader = sceneShow("Crews-view.fxml", "Crews");
+        FlightsController controller = loader.getController();
+        controller.setMain(this);
+        controller.setAdminInfo(adEmail, adName);
+        primaryStage.show();
+    }
+
     public static void main(String[] args) {
         launch();
     }

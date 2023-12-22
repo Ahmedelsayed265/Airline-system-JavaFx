@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="560" prefWidth="750" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.AirCraftsController">
+<AnchorPane prefHeight="560" prefWidth="750" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.CrewsController">
     <AnchorPane prefHeight="560.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-background-radius: 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <ImageView fitHeight="80.0" fitWidth="88.0" layoutX="56.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/logo.png" />
@@ -50,7 +50,7 @@
                 <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="30.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../images/i3.png" />
                 </ImageView>
-                <Hyperlink layoutX="56.0" layoutY="8.0" text="Aircrafts" textFill="WHITE">
+                <Hyperlink layoutX="56.0" layoutY="8.0" onAction="#goAirCrafts" text="Aircrafts" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -80,7 +80,7 @@
                 <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="30.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../images/i5.png" />
                 </ImageView>
-                <Hyperlink layoutX="56.0" layoutY="8.0" onAction="#goCrews" text="Crews" textFill="#080c53">
+                <Hyperlink layoutX="56.0" layoutY="8.0" text="Crews" textFill="#080c53">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -150,19 +150,19 @@
             <Label layoutX="12.0" layoutY="58.0" text="Air Craft Type*" />
             <Label layoutX="284.0" layoutY="58.0" text="Capacity*" />
             <TextField fx:id="capacity" layoutX="284.0" layoutY="80.0" prefHeight="40.0" prefWidth="224.0" promptText="Enter Airport Location" />
-            <Button layoutX="408.0" layoutY="138.0" mnemonicParsing="false" onAction="#addAirCraft" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #00a4bf;" text="Add" textFill="WHITE">
-            <font>
-               <Font name="System Bold" size="14.0" />
-            </font>
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor></Button>
+            <Button layoutX="408.0" layoutY="138.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #00a4bf;" text="Add" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor></Button>
             <Label layoutX="186.0" layoutY="14.0" text="Add Air Craft" textFill="#080c53">
                 <font>
                     <Font name="System Bold" size="24.0" />
                 </font></Label>
-         <Label fx:id="typeRequired" layoutX="12.0" layoutY="120.0" textFill="RED" />
-         <Label fx:id="capacityRequired" layoutX="284.0" layoutY="120.0" textFill="RED" />
+            <Label fx:id="typeRequired" layoutX="12.0" layoutY="120.0" textFill="RED" />
+            <Label fx:id="capacityRequired" layoutX="284.0" layoutY="120.0" textFill="RED" />
         </children>
         <cursor>
             <Cursor fx:constant="DEFAULT" />

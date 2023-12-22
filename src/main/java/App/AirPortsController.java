@@ -48,6 +48,11 @@ public class AirPortsController {
     }
 
     @FXML
+    public void goCrews() throws Exception {
+        mainApp.showCrewsScene();
+    }
+
+    @FXML
     public void addAirport() {
         String name = airPortName.getText();
         String location = airPortLocation.getText();

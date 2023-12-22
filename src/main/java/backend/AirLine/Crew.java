@@ -1,22 +1,15 @@
 package backend.AirLine;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
 public class Crew extends People {
     private static  int counter;
-    private Flight flight;
     private String capitanName;
 
-    public Crew(String name, Flight flight, String capitanName) {
+    public Crew(String name, String capitanName) {
         super(++counter, name);
-        this.flight = flight;
         this.capitanName = capitanName;
-    }
-
-    public Flight getflight() {
-        return flight;
-    }
-
-    public void setFlight(Flight flight) {
-        this.flight = flight;
     }
 
     public String getCapitanName() {
@@ -27,7 +20,15 @@ public class Crew extends People {
         this.capitanName = capitanName;
     }
 
-    //add update - remove - assign
+    public static ArrayList<String> fetchCrewsNames() throws Exception {
+        ArrayList<String> crewsNames = new ArrayList<>();
+        String query = "SELECT name FROM crews";
+        ResultSet resultSet = DatabaseConnector.fetchData(query);
+        while (resultSet.next()) {
+            String crewName = resultSet.getString("name");
+            crewsNames.add(crewName);
+        }
+        return crewsNames;
+    }
 
 }
-

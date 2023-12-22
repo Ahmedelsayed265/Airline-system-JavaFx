@@ -40,4 +40,9 @@ public class HomeController {
     public void goFlights() throws Exception {
         mainApp.showFlightsScene();
     }
+
+    @FXML
+    public void goCrews() throws Exception {
+        mainApp.showCrewsScene();
+    }
 }

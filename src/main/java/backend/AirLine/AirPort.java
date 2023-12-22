@@ -2,7 +2,9 @@ package backend.AirLine;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AirPort extends Model {
     private static int counter;
@@ -39,6 +41,17 @@ public class AirPort extends Model {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public static ArrayList<String> fetchAirportsNames() throws Exception {
+        ArrayList<String> airportNames = new ArrayList<>();
+        String query = "SELECT name FROM Airports";
+        ResultSet resultSet = DatabaseConnector.fetchData(query);
+        while (resultSet.next()) {
+            String airportName = resultSet.getString("name");
+            airportNames.add(airportName);
+        }
+        return airportNames;
     }
 
 }

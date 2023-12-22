@@ -49,6 +49,10 @@ public class AirCraftsController {
         mainApp.showAirportsScene();
     }
 
+    @FXML
+    public void goCrews() throws Exception {
+        mainApp.showCrewsScene();
+    }
 
     public static void infoBox(String infoMessage, String title) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

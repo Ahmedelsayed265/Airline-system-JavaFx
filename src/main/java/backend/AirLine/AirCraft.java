@@ -2,7 +2,9 @@ package backend.AirLine;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AirCraft extends Model {
     private static int counter;
@@ -41,5 +43,15 @@ public class AirCraft extends Model {
         this.capacity = capacity;
     }
 
+    public static ArrayList<String> fetchAirCraftsNames() throws Exception {
+        ArrayList<String> airCraftsNames = new ArrayList<>();
+        String query = "SELECT type FROM Aircrafts";
+        ResultSet resultSet = DatabaseConnector.fetchData(query);
+        while (resultSet.next()) {
+            String airCraftName = resultSet.getString("type");
+            airCraftsNames.add(airCraftName);
+        }
+        return airCraftsNames;
+    }
     //add addAirCraft - editAirCraft - deleteAirCraft - displayAirCraft
 }

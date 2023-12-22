@@ -1,6 +1,8 @@
 package App;
 
+import backend.AirLine.AirCraft;
 import backend.AirLine.AirPort;
+import backend.AirLine.Crew;
 import backend.AirLine.Flight;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,14 +19,13 @@ public class FlightsController {
     @FXML
     private Label adminNameLabel, adminEmailLabel, seats;
     @FXML
-    private Label arrAirportSelected, depAirportSelected, aircraftSelected, depTimeRequired, arrTimeRequired;
+    private Label arrAirportSelected, depAirportSelected, aircraftSelected, depTimeRequired, arrTimeRequired, crewSelected;
     @FXML
-    private ComboBox<String> depAirports, arrAirports, airCraftsNames;
+    private ComboBox<String> depAirports, arrAirports, airCraftsNames , crewNames;
     @FXML
     private DatePicker depTime, arrTime;
     private Main mainApp;
     public String adName, adEmail;
-    private boolean v1, v2, v3, v4, v5;
     private int cap;
 
     public void setMain(Main main) {
@@ -60,14 +61,20 @@ public class FlightsController {
     }
 
     @FXML
+    public void goCrews() throws Exception {
+        mainApp.showFlightsScene();
+    }
+
+    @FXML
     public void initialize() throws Exception {
         airPortsNames();
+        crewsNames();
         airCraftsNames();
     }
 
     @FXML
     public void airPortsNames() throws Exception {
-        ArrayList<String> airports = Flight.fetchAirportsNames();
+        ArrayList<String> airports = AirPort.fetchAirportsNames();
         ObservableList<String> comboBoxItems = FXCollections.observableArrayList(airports);
         depAirports.setItems(comboBoxItems);
         arrAirports.setItems(comboBoxItems);
@@ -75,9 +82,16 @@ public class FlightsController {
 
     @FXML
     public void airCraftsNames() throws Exception {
-        ArrayList<String> airCrafts = Flight.fetchAirCraftsNames();
+        ArrayList<String> airCrafts = AirCraft.fetchAirCraftsNames();
         ObservableList<String> comboBoxItems = FXCollections.observableArrayList(airCrafts);
         airCraftsNames.setItems(comboBoxItems);
+    }
+
+    @FXML
+    public void crewsNames() throws Exception{
+        ArrayList<String> crews = Crew.fetchCrewsNames();
+        ObservableList<String> comboBoxItems = FXCollections.observableArrayList(crews);
+        crewNames.setItems(comboBoxItems);
     }
 
     @FXML
@@ -91,9 +105,11 @@ public class FlightsController {
         String depAirport = depAirports.getValue();
         String arrAirport = arrAirports.getValue();
         String aircraftName = airCraftsNames.getValue();
+        String crewName = crewNames.getValue();
         Date depDate = (depTime.getValue() != null) ? Date.valueOf(depTime.getValue()) : null;
         Date arrDate = (arrTime.getValue() != null) ? Date.valueOf(arrTime.getValue()) : null;
 
+        boolean v1, v2, v3, v4, v5,v6;
         if (depAirport == null) {
             depAirportSelected.setText("Departure airport must be selected*");
             v1 = false;
@@ -115,6 +131,13 @@ public class FlightsController {
             aircraftSelected.setText("");
             v3 = true;
         }
+        if (crewName == null) {
+            crewSelected.setText("Crew must be selected*");
+            v6 = false;
+        } else {
+            crewSelected.setText("");
+            v6 = true;
+        }
         if (depDate == null) {
             depTimeRequired.setText("Departure time is required*");
             v4 = false;
@@ -130,15 +153,15 @@ public class FlightsController {
             v5 = true;
         }
 
-        if (v1 && v2 && v3 && v4 && v5) {
-            //assert depAirport != null;
+        if (v1 && v2 && v3 && v4 && v5 && v6) {
             if (depAirport.equals(arrAirport)) {
                 errorBox("You can't choose same value for departure airport and arrival airport ", "Error");
             } else {
-                Flight flight = new Flight(depAirport, arrAirport, depDate, arrDate, aircraftName, cap);
+                Flight flight = new Flight(depAirport, arrAirport, depDate, arrDate, aircraftName,crewName ,cap);
                 infoBox("Flight Added Successfully", "Success");
                 depAirports.setValue(null);
                 arrAirports.setValue(null);
+                crewNames.setValue(null);
                 airCraftsNames.setValue(null);
                 depTime.setValue(null);
                 arrTime.setValue(null);
