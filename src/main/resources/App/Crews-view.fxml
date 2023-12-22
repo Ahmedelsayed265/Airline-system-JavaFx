@@ -45,12 +45,12 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </AnchorPane>
-        <AnchorPane layoutX="10.0" layoutY="210.0" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #00a4bf; -fx-background-radius: 8;">
+        <AnchorPane layoutX="10.0" layoutY="210.0" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 8;">
             <children>
                 <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="30.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../images/i3.png" />
                 </ImageView>
-                <Hyperlink layoutX="56.0" layoutY="8.0" onAction="#goAirCrafts" text="Aircrafts" textFill="WHITE">
+                <Hyperlink layoutX="56.0" layoutY="8.0" onAction="#goAirCrafts" text="Aircrafts" textFill="#080c53">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -75,12 +75,12 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </AnchorPane>
-        <AnchorPane layoutX="10.0" layoutY="300.0" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 8;">
+        <AnchorPane layoutX="10.0" layoutY="300.0" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #00a4bf; -fx-background-radius: 8;">
             <children>
                 <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="30.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../images/i5.png" />
                 </ImageView>
-                <Hyperlink layoutX="56.0" layoutY="8.0" text="Crews" textFill="#080c53">
+                <Hyperlink layoutX="56.0" layoutY="8.0" text="Crews" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -146,10 +146,10 @@
     </AnchorPane>
     <AnchorPane layoutX="210.0" layoutY="23.0" prefHeight="192.0" prefWidth="520.0" style="-fx-background-color: #fff; -fx-background-radius: 4px;" AnchorPane.leftAnchor="215.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
         <children>
-            <TextField fx:id="type" layoutX="12.0" layoutY="80.0" prefHeight="40.0" prefWidth="260.0" promptText="Enter AirportName" />
-            <Label layoutX="12.0" layoutY="58.0" text="Air Craft Type*" />
-            <Label layoutX="284.0" layoutY="58.0" text="Capacity*" />
-            <TextField fx:id="capacity" layoutX="284.0" layoutY="80.0" prefHeight="40.0" prefWidth="224.0" promptText="Enter Airport Location" />
+            <TextField fx:id="type" layoutX="12.0" layoutY="80.0" prefHeight="40.0" prefWidth="242.0" promptText="Enter AirportName" />
+            <Label layoutX="12.0" layoutY="58.0" text="Crew Name*" />
+            <Label layoutX="266.0" layoutY="58.0" text="Captain Name*" />
+            <TextField fx:id="capacity" layoutX="266.0" layoutY="80.0" prefHeight="40.0" prefWidth="242.0" promptText="Enter Airport Location" />
             <Button layoutX="408.0" layoutY="138.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #00a4bf;" text="Add" textFill="WHITE">
                 <font>
                     <Font name="System Bold" size="14.0" />
@@ -157,7 +157,7 @@
                 <cursor>
                     <Cursor fx:constant="HAND" />
                 </cursor></Button>
-            <Label layoutX="186.0" layoutY="14.0" text="Add Air Craft" textFill="#080c53">
+            <Label layoutX="199.0" layoutY="14.0" text="Add Crew" textFill="#080c53">
                 <font>
                     <Font name="System Bold" size="24.0" />
                 </font></Label>
