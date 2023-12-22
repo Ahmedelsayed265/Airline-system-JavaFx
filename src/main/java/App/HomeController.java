@@ -15,6 +15,7 @@ public class HomeController {
         this.mainApp = main;
     }
 
+    @FXML
     public void setAdminInfo(String adminEmail, String adminName) {
         adminNameLabel.setText(adminName);
         adminEmailLabel.setText(adminEmail);
@@ -23,5 +24,10 @@ public class HomeController {
     @FXML
     public void goLogin() throws Exception {
         mainApp.showLoginScene();
+    }
+
+    @FXML
+    public void goAirports() throws Exception {
+        mainApp.showAirportsScene();
     }
 }
