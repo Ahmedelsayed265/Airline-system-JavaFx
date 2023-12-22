@@ -53,6 +53,10 @@ public class AirCraftsController {
     public void goCrews() throws Exception {
         mainApp.showCrewsScene();
     }
+    @FXML
+    public void goReservations() throws Exception {
+        mainApp.showReservationsScene();
+    }
 
     public static void infoBox(String infoMessage, String title) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

@@ -89,6 +89,13 @@ public class Main extends Application {
         controller.setAdminInfo(adEmail, adName);
         primaryStage.show();
     }
+    public void showReservationsScene() throws Exception {
+        FXMLLoader loader = sceneShow("Reservations-view.fxml", "Reservations");
+        ReservationsController controller = loader.getController();
+        controller.setMain(this);
+        controller.setAdminInfo(adEmail, adName);
+        primaryStage.show();
+    }
 
     public static void main(String[] args) {
         launch();

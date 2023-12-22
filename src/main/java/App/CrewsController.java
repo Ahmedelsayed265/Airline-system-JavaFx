@@ -48,6 +48,10 @@ public class CrewsController {
     public void goAirCrafts() throws Exception {
         mainApp.showAirCraftsScene();
     }
+    @FXML
+    public void goReservations() throws Exception {
+        mainApp.showReservationsScene();
+    }
 
     @FXML
     public void setAdminInfo(String adminEmail, String adminName) {
