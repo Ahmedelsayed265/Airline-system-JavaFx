@@ -13,9 +13,16 @@ public class AirPort extends Model {
         super(++counter);
         this.name = name;
         this.location = location;
-    }
-    public AirPort() {
-        super(++counter);
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String query = "INSERT INTO Airports (name, location) VALUES (?, ?)";
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setString(1, name);
+                ps.setString(2, location);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getName() {
@@ -32,19 +39,6 @@ public class AirPort extends Model {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public void AddAirport(String name, String location) {
-        try (Connection connection = DatabaseConnector.getConnection()) {
-            String query = "INSERT INTO Airports (name, location) VALUES (?, ?)";
-            try (PreparedStatement ps = connection.prepareStatement(query)) {
-                ps.setString(1, name);
-                ps.setString(2, location);
-                ps.executeUpdate();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

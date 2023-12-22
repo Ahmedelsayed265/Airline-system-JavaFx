@@ -13,7 +13,7 @@ public class AirPortsController {
     private TextField airPortName, airPortLocation;
     private Main mainApp;
     public String adName, adEmail;
-    boolean validationFailed = false;
+    boolean valid1 = true, valid2 = true;
 
     public void setMain(Main main) {
         this.mainApp = main;
@@ -38,6 +38,11 @@ public class AirPortsController {
     }
 
     @FXML
+    public void goFlights() throws Exception {
+        mainApp.showFlightsScene();
+    }
+
+    @FXML
     public void goAirCrafts() throws Exception {
         mainApp.showAirCraftsScene();
     }
@@ -49,21 +54,24 @@ public class AirPortsController {
 
         if (name == null || name.trim().isEmpty()) {
             nameRequiredLabel.setText("Airport name is required*");
-            validationFailed = true;
+            valid1 = false;
         } else {
             nameRequiredLabel.setText("");
+            valid1 = true;
         }
         if (location == null || location.trim().isEmpty()) {
             locationRequiredLabel.setText("Airport location is required*");
-            validationFailed = true;
+            valid2 = false;
         } else {
             locationRequiredLabel.setText("");
+            valid2 = true;
         }
 
-        if (!validationFailed) {
-            AirPort airPort = new AirPort();
-            airPort.AddAirport(name , location);
+        if (valid1 && valid2) {
+            AirPort airPort = new AirPort(name, location);
             infoBox("Airport Added Successfully", "Success");
+            airPortName.setText(null);
+            airPortLocation.setText(null);
         }
     }
 

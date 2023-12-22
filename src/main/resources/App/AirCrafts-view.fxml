@@ -65,7 +65,7 @@
                 <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="30.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../images/i4.png" />
                 </ImageView>
-                <Hyperlink layoutX="56.0" layoutY="8.0" text="Flights" textFill="#080c53">
+                <Hyperlink layoutX="56.0" layoutY="8.0" onAction="#goFlights" text="Flights" textFill="#080c53">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -144,13 +144,13 @@
         </Label>
         <Label fx:id="adminEmailLabel" layoutX="14.0" layoutY="529.0" text="ahmedelsayed@icloud.com" textFill="#00a4bf" />
     </AnchorPane>
-    <AnchorPane layoutX="210.0" layoutY="23.0" prefHeight="180.0" prefWidth="520.0" style="-fx-background-color: #fff; -fx-background-radius: 4px;" AnchorPane.leftAnchor="215.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+    <AnchorPane layoutX="210.0" layoutY="23.0" prefHeight="192.0" prefWidth="520.0" style="-fx-background-color: #fff; -fx-background-radius: 4px;" AnchorPane.leftAnchor="215.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
         <children>
-            <TextField layoutX="12.0" layoutY="80.0" prefHeight="40.0" prefWidth="260.0" promptText="Enter AirportName" />
+            <TextField fx:id="type" layoutX="12.0" layoutY="80.0" prefHeight="40.0" prefWidth="260.0" promptText="Enter AirportName" />
             <Label layoutX="12.0" layoutY="58.0" text="Air Craft Type*" />
             <Label layoutX="284.0" layoutY="58.0" text="Capacity*" />
-            <TextField layoutX="284.0" layoutY="80.0" prefHeight="40.0" prefWidth="224.0" promptText="Enter Airport Location" />
-            <Button layoutX="409.0" layoutY="130.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #00a4bf;" text="Add" textFill="WHITE">
+            <TextField fx:id="capacity" layoutX="284.0" layoutY="80.0" prefHeight="40.0" prefWidth="224.0" promptText="Enter Airport Location" />
+            <Button layoutX="408.0" layoutY="138.0" mnemonicParsing="false" onAction="#addAirCraft" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #00a4bf;" text="Add" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
@@ -161,6 +161,8 @@
                 <font>
                     <Font name="System Bold" size="24.0" />
                 </font></Label>
+         <Label fx:id="typeRequired" layoutX="12.0" layoutY="120.0" textFill="RED" />
+         <Label fx:id="capacityRequired" layoutX="284.0" layoutY="120.0" textFill="RED" />
         </children>
         <cursor>
             <Cursor fx:constant="DEFAULT" />

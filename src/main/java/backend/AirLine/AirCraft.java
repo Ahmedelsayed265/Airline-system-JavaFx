@@ -1,5 +1,9 @@
 package backend.AirLine;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class AirCraft extends Model {
     private static int counter;
     private String airCraftType;
@@ -9,6 +13,16 @@ public class AirCraft extends Model {
         super(++counter);
         this.airCraftType = airCraftType;
         this.capacity = capacity;
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String query = "INSERT INTO Aircrafts (type, capacity) VALUES (?, ?)";
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setString(1, airCraftType);
+                ps.setInt(2, capacity);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getAirCraftType() {
