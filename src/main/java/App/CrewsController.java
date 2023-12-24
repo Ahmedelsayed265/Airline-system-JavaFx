@@ -98,16 +98,18 @@ public class CrewsController {
         if (valid1 && valid2) {
             Crew cr = new Crew(crew, captain);
             infoBox("Crew Added Successfully", "Success");
+            listC.add(cr);
+            crewTable.setItems(listC);
             crewName.setText(null);
             captainName.setText(null);
         }
 
     }
 
-    public void initialize(){
-        idCol.setCellValueFactory(new PropertyValueFactory<Crew, Integer>("id"));
-        nameCol.setCellValueFactory(new PropertyValueFactory<Crew, String>("crewName"));
-        cNameCol.setCellValueFactory(new PropertyValueFactory<Crew, String>("captainName"));
+    public void initialize() {
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        cNameCol.setCellValueFactory(new PropertyValueFactory<>("capitanName"));
         listC = DatabaseConnector.fetchCrews();
         crewTable.setItems(listC);
     }

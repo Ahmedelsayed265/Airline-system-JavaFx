@@ -9,8 +9,6 @@ import java.util.ArrayList;
 public class Crew extends People {
     private static int counter;
     private String capitanName;
-    private int id;
-    private String name;
 
     public Crew(String name, String capitanName) {
         super(++counter, name);
@@ -29,8 +27,7 @@ public class Crew extends People {
     }
 
     public Crew(int id ,String name , String cName) {
-        super(id , name);
-        this.id =id;
+        super(++counter , name);
         this.capitanName = cName;
     }
 
