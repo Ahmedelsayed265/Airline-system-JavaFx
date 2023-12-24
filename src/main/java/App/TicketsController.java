@@ -1,15 +1,13 @@
 package App;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 
-public class HomeController {
+public class TicketsController {
     @FXML
-    private Label adminNameLabel;
-    @FXML
-    private Label adminEmailLabel;
-
+    private Label adminNameLabel, adminEmailLabel;
     private Main mainApp;
+    public String adName, adEmail;
 
     public void setMain(Main main) {
         this.mainApp = main;
@@ -17,13 +15,15 @@ public class HomeController {
 
     @FXML
     public void setAdminInfo(String adminEmail, String adminName) {
+        adName = adminName;
+        adEmail = adminEmail;
         adminNameLabel.setText(adminName);
         adminEmailLabel.setText(adminEmail);
     }
 
     @FXML
-    public void goLogin() throws Exception {
-        mainApp.showLoginScene();
+    public void goHome() throws Exception {
+        mainApp.showHomeScene(adEmail, adName);
     }
 
     @FXML
@@ -47,12 +47,13 @@ public class HomeController {
     }
 
     @FXML
+    public void goLogin() throws Exception {
+        mainApp.showLoginScene();
+    }
+
+    @FXML
     public void goReservations() throws Exception {
         mainApp.showReservationsScene();
     }
 
-    @FXML
-    public void goTickets() throws Exception {
-        mainApp.showTicketsScene();
-    }
 }

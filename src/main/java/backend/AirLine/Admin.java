@@ -64,7 +64,7 @@ public class Admin extends Model {
                     }
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
         return null;
@@ -81,7 +81,7 @@ public class Admin extends Model {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
     /* -------- end Login Methods -------- */
@@ -112,7 +112,7 @@ public class Admin extends Model {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

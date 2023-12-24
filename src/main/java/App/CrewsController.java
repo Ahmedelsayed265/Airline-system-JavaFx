@@ -1,12 +1,21 @@
 package App;
 
 import backend.AirLine.Crew;
+import backend.AirLine.DatabaseConnector;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class CrewsController {
+    @FXML
+    private TableView<Crew> crewTable;
+    @FXML
+    private TableColumn<Crew, Integer> idCol;
+    @FXML
+    private TableColumn<Crew, String> nameCol;
+    @FXML
+    private TableColumn<Crew, String> cNameCol;
     @FXML
     private TextField crewName, captainName;
     @FXML
@@ -17,7 +26,9 @@ public class CrewsController {
     private Label adminEmailLabel;
     private Main mainApp;
     public String adName, adEmail;
-    boolean valid1,valid2;
+    boolean valid1, valid2;
+
+    ObservableList<Crew> listC;
 
     public void setMain(Main main) {
         this.mainApp = main;
@@ -47,9 +58,15 @@ public class CrewsController {
     public void goAirCrafts() throws Exception {
         mainApp.showAirCraftsScene();
     }
+
     @FXML
     public void goReservations() throws Exception {
         mainApp.showReservationsScene();
+    }
+
+    @FXML
+    public void goTickets() throws Exception {
+        mainApp.showTicketsScene();
     }
 
     @FXML
@@ -79,13 +96,22 @@ public class CrewsController {
         }
 
         if (valid1 && valid2) {
-            Crew cr =  new Crew(crew , captain);
+            Crew cr = new Crew(crew, captain);
             infoBox("Crew Added Successfully", "Success");
             crewName.setText(null);
             captainName.setText(null);
         }
 
     }
+
+    public void initialize(){
+        idCol.setCellValueFactory(new PropertyValueFactory<Crew, Integer>("id"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<Crew, String>("crewName"));
+        cNameCol.setCellValueFactory(new PropertyValueFactory<Crew, String>("captainName"));
+        listC = DatabaseConnector.fetchCrews();
+        crewTable.setItems(listC);
+    }
+
     public static void infoBox(String infoMessage, String title) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText(infoMessage);

@@ -28,7 +28,6 @@ public class Reservation extends Model {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Print the stack trace for debugging
             throw new RuntimeException(e);
         }
     }

@@ -68,6 +68,11 @@ public class ReservationsController {
     }
 
     @FXML
+    public void goTickets() throws Exception {
+        mainApp.showTicketsScene();
+    }
+
+    @FXML
     public void initialize() throws Exception {
         flights();
     }

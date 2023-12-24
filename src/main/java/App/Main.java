@@ -88,9 +88,18 @@ public class Main extends Application {
         controller.setAdminInfo(adEmail, adName);
         primaryStage.show();
     }
+
     public void showReservationsScene() throws Exception {
         FXMLLoader loader = sceneShow("Reservations-view.fxml", "Reservations");
         ReservationsController controller = loader.getController();
+        controller.setMain(this);
+        controller.setAdminInfo(adEmail, adName);
+        primaryStage.show();
+    }
+
+    public void showTicketsScene() throws Exception {
+        FXMLLoader loader = sceneShow("Tickets-view.fxml", "Tickets");
+        TicketsController controller = loader.getController();
         controller.setMain(this);
         controller.setAdminInfo(adEmail, adName);
         primaryStage.show();

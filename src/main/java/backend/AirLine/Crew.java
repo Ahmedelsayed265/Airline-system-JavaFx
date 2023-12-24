@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Crew extends People {
-    private static  int counter;
+    private static int counter;
     private String capitanName;
+    private int id;
+    private String name;
 
     public Crew(String name, String capitanName) {
         super(++counter, name);
@@ -24,6 +26,12 @@ public class Crew extends People {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Crew(int id ,String name , String cName) {
+        super(id , name);
+        this.id =id;
+        this.capitanName = cName;
     }
 
     public String getCapitanName() {

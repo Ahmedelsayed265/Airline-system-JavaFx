@@ -53,9 +53,15 @@ public class AirCraftsController {
     public void goCrews() throws Exception {
         mainApp.showCrewsScene();
     }
+
     @FXML
     public void goReservations() throws Exception {
         mainApp.showReservationsScene();
+    }
+
+    @FXML
+    public void goTickets() throws Exception {
+        mainApp.showTicketsScene();
     }
 
     public static void infoBox(String infoMessage, String title) {
