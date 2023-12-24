@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Flight extends Model {
     private static int counter;
+
     public Flight(String departureAirPort, String arrivalAirPort, Date departureTime
             , Date arrivalTime, String airCraft, String crew, int availableSeats) throws Exception {
         super(++counter);
@@ -72,5 +73,28 @@ public class Flight extends Model {
             return res.getInt("id");
         }
         return 0;
+    }
+
+    // fetch flight data
+    public static ArrayList<String> fetchFlights() throws Exception {
+        ArrayList<String> flights = new ArrayList<>();
+        String query = "SELECT id, departureAirport_id, arrivalAirport_id FROM Flights";
+        ResultSet res = DatabaseConnector.fetchData(query);
+        while (res.next()) {
+            int flightId = res.getInt("id");
+            int departureAirport_id = res.getInt("departureAirport_id");
+            int arrivalAirport_id = res.getInt("arrivalAirport_id");
+            flights.add(flightId + "- from ( " + fetchAirportLocation(departureAirport_id) + " ) to ( " + fetchAirportLocation(arrivalAirport_id) + " )");
+        }
+        return flights;
+    }
+
+    private static String fetchAirportLocation(int id) throws Exception {
+        String query = "SELECT location From Airports WHERE id = \"" + id + "\";";
+        ResultSet res = DatabaseConnector.fetchData(query);
+        if (res.next()) {
+            return res.getString("location");
+        }
+        return "";
     }
 }
