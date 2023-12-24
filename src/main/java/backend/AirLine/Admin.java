@@ -115,5 +115,14 @@ public class Admin extends Model {
             e.printStackTrace();
         }
     }
-    /* -------- end Register Methods -------- */
+
+    //get admin ID by using admin name
+    public static int adminId(String adminName) throws Exception {
+        String query = "SELECT id From admins WHERE name = \"" + adminName + "\";";
+        ResultSet res = DatabaseConnector.fetchData(query);
+        if (res.next()) {
+            return res.getInt("id");
+        }
+        return 0;
+    }
 }

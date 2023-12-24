@@ -1,36 +1,53 @@
 package backend.AirLine;
 
-import java.sql.Date;
+import java.sql.*;
 
 public class Reservation extends Model {
     private static int counter;
-    private Admin admin;
-    private Flight flight;
+    private int adminId;
+    private int flightId;
     private int seatNumber;
-    private Date reservationTime;
-
-    public Reservation(Admin admin, Flight flight, int seatNumber, Date reservationTime) {
+    private Date reservationDate;
+    private double price;
+    public Reservation(int adminId, int flightId, int seatNumber, Date reservationDate, double price) {
         super(++counter);
-        this.admin = admin;
-        this.flight = flight;
+        this.adminId = adminId;
+        this.flightId = flightId;
         this.seatNumber = seatNumber;
-        this.reservationTime = reservationTime;
+        this.reservationDate = reservationDate;
+        this.price = price;
+
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String query = "INSERT INTO reservations (admin_id, flight_id, seatNumber, reservationTime, price) VALUES (?,?,?,?,?)";
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setInt(1, adminId);
+                ps.setInt(2, flightId);
+                ps.setInt(3, seatNumber);
+                ps.setDate(4, reservationDate);
+                ps.setDouble(5, price);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print the stack trace for debugging
+            throw new RuntimeException(e);
+        }
     }
 
-    public Admin getAdmin() {
-        return admin;
+
+    public int getAdminId() {
+        return adminId;
     }
 
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
     }
 
-    public Flight getFlight() {
-        return flight;
+    public int getFlightId() {
+        return flightId;
     }
 
-    public void setFlight(Flight flight) {
-        this.flight = flight;
+    public void setFlightId(int flightId) {
+        this.flightId = flightId;
     }
 
     public int getSeatNumber() {
@@ -41,13 +58,30 @@ public class Reservation extends Model {
         this.seatNumber = seatNumber;
     }
 
-    public Date getReservationTime() {
-        return reservationTime;
+    public Date getReservationDate() {
+        return reservationDate;
     }
 
-    public void setReservationTime(Date reservationTime) {
-        this.reservationTime = reservationTime;
+    public void setReservationDate(Date reservationDate) {
+        this.reservationDate = reservationDate;
     }
 
-    // makeReservation - cancelReservation - viewReservation
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    //get reservation ID by using admin id
+    public static int getReservationId(int adminId) throws Exception {
+        String query = "SELECT id From reservations WHERE admin_id = \"" + adminId + "\";";
+        ResultSet res = DatabaseConnector.fetchData(query);
+        if (res.next()) {
+            return res.getInt("id");
+        }
+        return 0;
+    }
+
 }

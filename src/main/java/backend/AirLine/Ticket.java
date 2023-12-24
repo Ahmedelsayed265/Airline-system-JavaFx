@@ -1,42 +1,47 @@
 package backend.AirLine;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class Ticket extends Model {
     private static int counter;
-    private Reservation reservation;
-    private Customer customer;
-    private double price;
+    private int reservationId;
+    private int customerId;
     private boolean paymentStatus;
 
-    public Ticket(Reservation reservation, Customer customer, double price, boolean paymentStatus) {
+    public Ticket(int reservationId, int customerId, boolean paymentStatus) {
         super(++counter);
-        this.reservation = reservation;
-        this.customer = customer;
-        this.price = price;
+        this.reservationId = reservationId;
+        this.customerId = customerId;
         this.paymentStatus = paymentStatus;
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String query = "INSERT INTO tickets (reservation_id ,customer_id, paymentStatus) VALUES (?,?,?)";
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setInt(1, reservationId);
+                ps.setInt(2, customerId);
+                ps.setBoolean(3, paymentStatus);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public Reservation getReservation() {
-        return reservation;
+    public int getReservationId() {
+        return reservationId;
     }
 
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
+    public void setReservationId(int reservationId) {
+        this.reservationId = reservationId;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public boolean isPaymentStatus() {
@@ -46,6 +51,4 @@ public class Ticket extends Model {
     public void setPaymentStatus(boolean paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
-
-    //add   issueTicket - cancelTicket - viewTicket
 }
