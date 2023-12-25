@@ -170,12 +170,15 @@
             <Cursor fx:constant="DEFAULT" />
         </cursor>
     </AnchorPane>
-   <TableView fx:id="crewTable" layoutX="215.0" layoutY="268.0" prefHeight="277.0" prefWidth="520.0">
+   <TableView fx:id="crewTable" layoutX="215.0" layoutY="268.0" prefHeight="277.0" prefWidth="520.0" AnchorPane.leftAnchor="215.0" AnchorPane.rightAnchor="15.0">
      <columns>
        <TableColumn fx:id="idCol" prefWidth="115.0" text="Crew ID" />
        <TableColumn fx:id="nameCol" prefWidth="200.0" text="Crew Name" />
          <TableColumn fx:id="cNameCol" prefWidth="204.0" text="Captain Name" />
      </columns>
+      <columnResizePolicy>
+         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+      </columnResizePolicy>
    </TableView>
    <Label layoutX="215.0" layoutY="221.0" text="Crews" textFill="#080c53">
       <font>

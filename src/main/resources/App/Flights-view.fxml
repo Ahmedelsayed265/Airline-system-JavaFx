@@ -6,6 +6,8 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -193,4 +195,22 @@
             <Cursor fx:constant="DEFAULT" />
         </cursor>
     </AnchorPane>
+   <Label layoutX="215.0" layoutY="389.0" text="Flights" textFill="#080c53">
+      <font>
+         <Font name="System Bold" size="24.0" />
+      </font>
+   </Label>
+   <TableView fx:id="flightsTable" layoutX="215.0" layoutY="432.0" prefHeight="114.0" prefWidth="520.0">
+     <columns>
+       <TableColumn fx:id="idCol" prefWidth="58.0" text="Flight ID" />
+       <TableColumn fx:id="depPort" prefWidth="102.0" text=" Dep.. Airport" />
+         <TableColumn fx:id="arrPort" prefWidth="87.0" text="Arr.. Airport" />
+         <TableColumn fx:id="depTimecol" prefWidth="93.0" text="Dep.. Time " />
+         <TableColumn fx:id="arrivalTime" prefWidth="71.0" text="Arr.. Time" />
+         <TableColumn fx:id="crewCol" prefWidth="48.0" text="Crew" />
+     </columns>
+      <columnResizePolicy>
+         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+      </columnResizePolicy>
+   </TableView>
 </AnchorPane>
