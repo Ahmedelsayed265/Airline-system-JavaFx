@@ -8,6 +8,7 @@ public class Ticket extends Model {
     private static int counter;
     private int reservationId;
     private int customerId;
+    private String customerName;
     private boolean paymentStatus;
 
     public Ticket(int reservationId, int customerId, boolean paymentStatus) {
@@ -26,6 +27,12 @@ public class Ticket extends Model {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public Ticket(int id, int reservationId ,String customerName, boolean paymentStatus){
+        super(id);
+        this.reservationId = reservationId;
+        this.customerName = customerName;
+        this.paymentStatus = paymentStatus;
     }
 
     public int getReservationId() {
@@ -50,5 +57,13 @@ public class Ticket extends Model {
 
     public void setPaymentStatus(boolean paymentStatus) {
         this.paymentStatus = paymentStatus;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 }

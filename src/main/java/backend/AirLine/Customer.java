@@ -41,4 +41,13 @@ public class Customer extends People {
         }
         return 0;
     }
+
+    public static String getCustomerName(int id) throws Exception {
+        String query = "SELECT name FROM Customers WHERE id = " + id;
+        ResultSet res = DatabaseConnector.fetchData(query);
+        if (res.next()) {
+            return res.getString("name");
+        }
+        return "";
+    }
 }

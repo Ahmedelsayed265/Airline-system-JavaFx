@@ -96,6 +96,22 @@ public class DatabaseConnector {
     }
 
 
+    public static ObservableList<Ticket> fetchTickets() throws Exception {
+        ObservableList<Ticket> list = FXCollections.observableArrayList();
+        Connection con = getConnection();
+        PreparedStatement st = con.prepareStatement("SELECT * FROM tickets");
+        ResultSet res = st.executeQuery();
+        while (res.next()) {
+            int id = res.getInt("id");
+            int reservationId = res.getInt("reservation_id");
+            int customerId = res.getInt("customer_id");
+            boolean paymentStatus = res.getBoolean("paymentStatus");
+            String customerName = Customer.getCustomerName(customerId);
+            list.add(new Ticket(id, reservationId, customerName, paymentStatus));
+        }
+        return list;
+    }
+
     public static int tablesCounter(String table) throws Exception {
         String query = "SELECT COUNT(*) FROM " + table;
         ResultSet res = fetchData(query);
