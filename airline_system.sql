@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2023 at 04:47 PM
+-- Generation Time: Dec 25, 2023 at 11:23 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -39,9 +39,8 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `password`) VALUES
-(1, 'admin', 'admin@admin.com', '123456'),
-(2, 'Ahmed Elsayed', 'ahmedelsayed@icloud.com', 'test1234'),
-(3, 'Abd Elrahman', 'AbdoSamy@gmail.com', '123456');
+(1, 'Ahmed Elsayed', 'ahmedelsayed@icloud.com', '123456'),
+(2, 'Abd Elrahman', 'abdosamy@gmail.com', '123456');
 
 -- --------------------------------------------------------
 
@@ -60,10 +59,13 @@ CREATE TABLE `aircrafts` (
 --
 
 INSERT INTO `aircrafts` (`id`, `type`, `capacity`) VALUES
-(1, 'Boeing 747 ', 416),
-(2, 'Embraer E190', 457),
-(3, 'LS234', 450),
-(4, 'Boenng67', 679);
+(1, 'Boeing 747', 660),
+(2, ' Airbus A380', 555),
+(3, 'Boeing 737', 215),
+(4, 'Airbus A320', 240),
+(5, 'Bombardier CRJ Series', 104),
+(6, 'Embraer E190', 114),
+(7, 'Cessna 172 Skyhawk', 4);
 
 -- --------------------------------------------------------
 
@@ -82,9 +84,13 @@ CREATE TABLE `airports` (
 --
 
 INSERT INTO `airports` (`id`, `name`, `location`) VALUES
-(1, 'Cairo International Airport', 'Cairo - Egypt'),
-(2, ' Aéroport Paris-Charles-de-Gaulle', 'Paris - France'),
-(3, 'Elsaloum', 'Elsaloum Egypt');
+(1, 'Heathrow Airport ', 'London, United Kingdom '),
+(2, 'Cairo International Airport', 'Cairo, Egypt'),
+(3, 'Dubai International Airport ', 'Dubai, United Arab Emirates '),
+(4, 'Tokyo Haneda Airport', 'Tokyo, Japan'),
+(5, 'Sydney Kingsford Smith Airport ', 'Sydney, Australia'),
+(6, 'Beijing Capital International Airport', 'Beijing, China'),
+(7, 'Los Angeles International Airport (LAX)', 'Los Angeles, California, USA');
 
 -- --------------------------------------------------------
 
@@ -103,8 +109,16 @@ CREATE TABLE `crews` (
 --
 
 INSERT INTO `crews` (`id`, `name`, `captainName`) VALUES
-(1, 'ducks', 'Ahmed Elsayed'),
-(2, 'Alpha', 'Nader Osama');
+(1, 'Skyward Voyagers', 'Anderson'),
+(2, 'Celestial Navigators', 'Martinez'),
+(3, 'Aero Explorers', 'Johnson'),
+(4, 'Nimbus Flyers', 'Smith'),
+(5, 'Starlight Aviators', 'Kim'),
+(6, 'Horizon Wings', 'Davis'),
+(7, 'Solar Soarers', ' Nguyen'),
+(8, 'Galactic Pilots ', 'Brown'),
+(9, 'Zenith Flyers', ' Patel'),
+(10, 'Aurora Airmen', 'Lee');
 
 -- --------------------------------------------------------
 
@@ -123,7 +137,9 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `phone`) VALUES
-(1, 'Abdulrahman Osama', '01121863185');
+(1, 'Ali Ashraf', '01046657884'),
+(2, 'Tarek Gamal', '011223'),
+(3, 'Mohamed Radwan', '015576776858');
 
 -- --------------------------------------------------------
 
@@ -147,9 +163,9 @@ CREATE TABLE `flights` (
 --
 
 INSERT INTO `flights` (`id`, `departureAirport_id`, `arrivalAirport_id`, `departureTime`, `arrivalTime`, `airCraftId`, `crew_id`, `availableSeats`) VALUES
-(3, 1, 2, '2023-12-05', '2023-12-12', 1, 1, 416),
-(4, 2, 3, '2023-12-12', '2023-11-27', 1, 1, 416),
-(5, 1, 3, '2023-12-01', '2023-12-05', 2, 1, 457);
+(1, 1, 2, '2023-12-25', '2023-12-26', 2, 1, 555),
+(2, 3, 4, '2023-12-14', '2023-12-15', 6, 6, 114),
+(3, 7, 5, '2023-12-20', '2023-12-20', 1, 3, 660);
 
 -- --------------------------------------------------------
 
@@ -163,13 +179,6 @@ CREATE TABLE `notifications` (
   `message` text NOT NULL,
   `time` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `notifications`
---
-
-INSERT INTO `notifications` (`id`, `customer_id`, `message`, `time`) VALUES
-(1, 1, 'Hello Mr. Abdo,\r\n\r\nWe have reserved seat number 56 for you on Flight 255 from Cairo, Egypt, to Paris, France, scheduled for departure on March 21, 2023. The flight is set to commence at 3:00 PM on April 17, 2023, and is expected to arrive in France on April 18, 2023.\r\n\r\nThe aircraft for this journey is a Boeing 777, and the captain in charge is Ahmed Elsayed. The crew\'s name is Ducks.\r\n\r\nThank you.', '2023-03-22');
 
 -- --------------------------------------------------------
 
@@ -186,6 +195,15 @@ CREATE TABLE `reservations` (
   `price` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `reservations`
+--
+
+INSERT INTO `reservations` (`id`, `admin_id`, `flight_id`, `seatNumber`, `reservationTime`, `price`) VALUES
+(1, 1, 1, 45, '2023-12-19', 4559.44),
+(2, 1, 2, 34, '2023-12-06', 6778.88),
+(3, 2, 2, 489, '2023-12-14', 20000);
+
 -- --------------------------------------------------------
 
 --
@@ -198,6 +216,15 @@ CREATE TABLE `tickets` (
   `customer_id` int(255) NOT NULL,
   `paymentStatus` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `reservation_id`, `customer_id`, `paymentStatus`) VALUES
+(1, 1, 1, 1),
+(2, 1, 2, 0),
+(3, 3, 3, 0);
 
 --
 -- Indexes for dumped tables
@@ -275,55 +302,55 @@ ALTER TABLE `tickets`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `aircrafts`
 --
 ALTER TABLE `aircrafts`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `airports`
 --
 ALTER TABLE `airports`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `crews`
 --
 ALTER TABLE `crews`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `flights`
 --
 ALTER TABLE `flights`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
