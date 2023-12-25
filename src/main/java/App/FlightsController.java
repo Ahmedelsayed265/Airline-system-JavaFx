@@ -33,7 +33,7 @@ public class FlightsController {
     private TableColumn<Flight, Date> arrivalTime;
     @FXML
     private TableColumn<Flight, String> crewCol;
-    ObservableList<Flight>listF;
+    ObservableList<Flight> listF;
     private Main mainApp;
     public String adName, adEmail;
     private int cap;
@@ -86,24 +86,6 @@ public class FlightsController {
     }
 
     @FXML
-    public void initialize() throws Exception {
-        airPortsNames();
-        crewsNames();
-        airCraftsNames();
-
-        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        depPort.setCellValueFactory(new PropertyValueFactory<>("departureAirPort"));
-        arrPort.setCellValueFactory(new PropertyValueFactory<>("arrivalAirPort"));
-        depTimeCol.setCellValueFactory(new PropertyValueFactory<>("departureDate"));
-        arrivalTime.setCellValueFactory(new PropertyValueFactory<>("arrivalDate"));
-        crewCol.setCellValueFactory(new PropertyValueFactory<>("crewName"));
-
-        listF = FXCollections.observableArrayList(DatabaseConnector.fetchFlights());
-        flightsTable.setItems(listF);
-
-    }
-
-    @FXML
     public void airPortsNames() throws Exception {
         ArrayList<String> airports = AirPort.fetchAirportsNames();
         ObservableList<String> comboBoxItems = FXCollections.observableArrayList(airports);
@@ -140,6 +122,7 @@ public class FlightsController {
         Date depDate = (depTime.getValue() != null) ? Date.valueOf(depTime.getValue()) : null;
         Date arrDate = (arrTime.getValue() != null) ? Date.valueOf(arrTime.getValue()) : null;
 
+        // inputs validation
         boolean v1, v2, v3, v4, v5, v6;
         if (depAirport == null) {
             depAirportSelected.setText("Departure airport must be selected*");
@@ -183,21 +166,40 @@ public class FlightsController {
             arrTimeRequired.setText("");
             v5 = true;
         }
-
         if (v1 && v2 && v3 && v4 && v5 && v6) {
             if (depAirport.equals(arrAirport)) {
                 errorBox("You can't choose same value for departure airport and arrival airport ", "Error");
             } else {
+                // add new flight in db
                 Flight flight = new Flight(depAirport, arrAirport, depDate, arrDate, aircraftName, crewName, cap);
                 infoBox("Flight Added Successfully", "Success");
-                depAirports.setValue(null);
-                arrAirports.setValue(null);
-                crewNames.setValue(null);
-                airCraftsNames.setValue(null);
+
+                // update table
+                Flight lFlight = new Flight(DatabaseConnector.tablesCounter("flights"), depAirport, arrAirport, depDate, arrDate, crewName);
+                listF.add(lFlight);
+                flightsTable.setItems(listF);
+
+                //reset form
                 depTime.setValue(null);
                 arrTime.setValue(null);
             }
         }
+    }
+
+    @FXML
+    public void initialize() throws Exception {
+        airPortsNames();
+        crewsNames();
+        airCraftsNames();
+        //table view
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        depPort.setCellValueFactory(new PropertyValueFactory<>("departureAirPort"));
+        arrPort.setCellValueFactory(new PropertyValueFactory<>("arrivalAirPort"));
+        depTimeCol.setCellValueFactory(new PropertyValueFactory<>("departureDate"));
+        arrivalTime.setCellValueFactory(new PropertyValueFactory<>("arrivalDate"));
+        crewCol.setCellValueFactory(new PropertyValueFactory<>("crewName"));
+        listF = DatabaseConnector.fetchFlights();
+        flightsTable.setItems(listF);
     }
 
     public static void infoBox(String infoMessage, String title) {

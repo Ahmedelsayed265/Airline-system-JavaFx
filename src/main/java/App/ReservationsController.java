@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -22,6 +23,21 @@ public class ReservationsController {
     private DatePicker resDate;
     @FXML
     private CheckBox payStatus;
+    @FXML
+    private TableView<Reservation> reservationsTable;
+    @FXML
+    private TableColumn<Reservation, Integer> idCol;
+    @FXML
+    private TableColumn<Reservation, String> adNameCol;
+    @FXML
+    private TableColumn<Reservation, Integer> flIdCol;
+    @FXML
+    private TableColumn<Reservation, Integer> seatNo;
+    @FXML
+    private TableColumn<Reservation, Date> dateCol;
+    @FXML
+    private TableColumn<Reservation, String> priceCol;
+    ObservableList<Reservation> listReservations;
     private Main mainApp;
     public String adName, adEmail;
 
@@ -75,6 +91,15 @@ public class ReservationsController {
     @FXML
     public void initialize() throws Exception {
         flights();
+        //table view
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        adNameCol.setCellValueFactory(new PropertyValueFactory<>("adminName"));
+        flIdCol.setCellValueFactory(new PropertyValueFactory<>("flightId"));
+        seatNo.setCellValueFactory(new PropertyValueFactory<>("seatNumber"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("reservationDate"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        listReservations = DatabaseConnector.fetchReservations();
+        reservationsTable.setItems(listReservations);
     }
 
     @FXML
@@ -167,8 +192,11 @@ public class ReservationsController {
             int cus_id = Customer.getCustomerId(cName);
             Ticket ticket = new Ticket(res_id, cus_id, paid);
 
+            Reservation reserv = new Reservation(DatabaseConnector.tablesCounter("reservations"), adName, flightId, seatNO, reservationDate, priceAmount);
+            listReservations.add(reserv);
+            reservationsTable.setItems(listReservations);
+
             infoBox("Reservation Added Successfully", "Success");
-            flight.setValue(null);
             customerName.setText(null);
             customerPhone.setText(null);
             seatNum.setText(null);

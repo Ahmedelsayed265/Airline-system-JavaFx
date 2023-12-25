@@ -8,7 +8,7 @@ public class Flight extends Model {
 
     static {
         try {
-            counter = DatabaseConnector.tablesCounter("aircrafts");
+            counter = DatabaseConnector.tablesCounter("flights");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -49,12 +49,52 @@ public class Flight extends Model {
         }
     }
 
-    public Flight(int id, String depAirPort, String arrAirPort, Date depDate, Date arrDate, String crewName) {
+    public Flight(int id, String departureAirPort, String arrivalAirPort, Date departureDate, Date arrivalDate, String crewName) {
         super(id);
-        this.departureAirPort = depAirPort;
-        this.arrivalAirPort = arrAirPort;
-        this.departureDate = depDate;
-        this.arrivalDate = arrDate;
+        this.departureAirPort = departureAirPort;
+        this.arrivalAirPort = arrivalAirPort;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
+        this.crewName = crewName;
+    }
+
+    public String getDepartureAirPort() {
+        return departureAirPort;
+    }
+
+    public void setDepartureAirPort(String departureAirPort) {
+        this.departureAirPort = departureAirPort;
+    }
+
+    public String getArrivalAirPort() {
+        return arrivalAirPort;
+    }
+
+    public void setArrivalAirPort(String arrivalAirPort) {
+        this.arrivalAirPort = arrivalAirPort;
+    }
+
+    public Date getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public Date getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(Date arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public String getCrewName() {
+        return crewName;
+    }
+
+    public void setCrewName(String crewName) {
         this.crewName = crewName;
     }
 

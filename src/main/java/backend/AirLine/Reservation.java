@@ -4,11 +4,31 @@ import java.sql.*;
 
 public class Reservation extends Model {
     private static int counter;
+
+    static {
+        try {
+            counter = DatabaseConnector.tablesCounter("reservations");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private int adminId;
+    private String adminName;
     private int flightId;
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
+
     private int seatNumber;
     private Date reservationDate;
     private double price;
+
     public Reservation(int adminId, int flightId, int seatNumber, Date reservationDate, double price) {
         super(++counter);
         this.adminId = adminId;
@@ -32,6 +52,14 @@ public class Reservation extends Model {
         }
     }
 
+    public Reservation(int id, String adminName, int flightId, int seatNumber, Date reservationDate, double price) {
+        super(id);
+        this.adminName = adminName;
+        this.flightId = flightId;
+        this.seatNumber = seatNumber;
+        this.reservationDate = reservationDate;
+        this.price = price;
+    }
 
     public int getAdminId() {
         return adminId;

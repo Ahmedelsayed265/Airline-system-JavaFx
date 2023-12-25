@@ -52,27 +52,49 @@ public class DatabaseConnector {
         }
         return list;
     }
+
     public static ObservableList<Flight> fetchFlights() throws Exception {
         ObservableList<Flight> list = FXCollections.observableArrayList();
         Connection con = getConnection();
         PreparedStatement st = con.prepareStatement("SELECT * FROM flights");
         ResultSet res = st.executeQuery();
         while (res.next()) {
-            int id=res.getInt("id");
-            int depAirportId=res.getInt("departureAirport_id");
-            int arrAirportId=res.getInt("arrivalAirport_id");
-            Date depDate=res.getDate("departureTime");
-            Date arrDate=res.getDate("arrivalTime");
-            int crewId=res.getInt("crew_id");
+            int id = res.getInt("id");
+            int depAirportId = res.getInt("departureAirport_id");
+            int arrAirportId = res.getInt("arrivalAirport_id");
+            Date depDate = res.getDate("departureTime");
+            Date arrDate = res.getDate("arrivalTime");
+            int crewId = res.getInt("crew_id");
 
             String depAirport = AirPort.getAirportName(depAirportId);
             String arrAirport = AirPort.getAirportName(arrAirportId);
-            String crewName= Crew.getCrewName(crewId);
+            String crewName = Crew.getCrewName(crewId);
 
-            list.add(new Flight(id,depAirport,arrAirport,depDate,arrDate,crewName));
+            list.add(new Flight(id, depAirport, arrAirport, depDate, arrDate, crewName));
         }
         return list;
     }
+
+    public static ObservableList<Reservation> fetchReservations() throws Exception {
+        ObservableList<Reservation> list = FXCollections.observableArrayList();
+        Connection con = getConnection();
+        PreparedStatement st = con.prepareStatement("SELECT * FROM reservations");
+        ResultSet res = st.executeQuery();
+        while (res.next()) {
+            int id = res.getInt("id");
+            int adminId = res.getInt("admin_id");
+            int flightId = res.getInt("flight_id");
+            int seatNo = res.getInt("seatNumber");
+            Date reserveDate = res.getDate("reservationTime");
+            double price = res.getDouble("price");
+
+            String adminName = Admin.getAdminName(adminId);
+
+            list.add(new Reservation(id, adminName, flightId, seatNo, reserveDate, price));
+        }
+        return list;
+    }
+
 
     public static int tablesCounter(String table) throws Exception {
         String query = "SELECT COUNT(*) FROM " + table;

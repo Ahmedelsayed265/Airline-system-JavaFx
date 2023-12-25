@@ -125,4 +125,14 @@ public class Admin extends Model {
         }
         return 0;
     }
+
+    //get admin name by using admin ID
+    public static String getAdminName(int id) throws Exception {
+        String query = "SELECT name FROM admins WHERE id = " + id;
+        ResultSet res = DatabaseConnector.fetchData(query);
+        if (res.next()) {
+            return res.getString("name");
+        }
+        return "";
+    }
 }

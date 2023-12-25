@@ -192,7 +192,7 @@
    <TableView fx:id="reservationsTable" layoutX="215.0" layoutY="408.0" prefHeight="141.0" prefWidth="520.0">
      <columns>
        <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
-       <TableColumn fx:id="adIdcol" prefWidth="75.0" text="Admin Name" />
+       <TableColumn fx:id="adNameCol" prefWidth="75.0" text="Admin Name" />
          <TableColumn fx:id="flIdCol" prefWidth="75.0" text="Flight ID" />
          <TableColumn fx:id="seatNo" prefWidth="75.0" text="Seat Number" />
          <TableColumn fx:id="dateCol" prefWidth="75.0" text="Date" />
