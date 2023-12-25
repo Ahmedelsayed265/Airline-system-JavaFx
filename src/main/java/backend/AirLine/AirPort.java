@@ -69,5 +69,13 @@ public class AirPort extends Model {
         return airportNames;
     }
 
-
+    //get airport name by using airport ID
+    public static String getAirportName(int id) throws Exception {
+        String query = "SELECT name FROM Airports WHERE id = " + id;
+        ResultSet res = DatabaseConnector.fetchData(query);
+        if (res.next()) {
+            return res.getString("name");
+        }
+        return "";
+    }
 }

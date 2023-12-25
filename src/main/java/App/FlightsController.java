@@ -1,16 +1,11 @@
 package App;
 
-import backend.AirLine.AirCraft;
-import backend.AirLine.AirPort;
-import backend.AirLine.Crew;
-import backend.AirLine.Flight;
+import backend.AirLine.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -24,6 +19,21 @@ public class FlightsController {
     private ComboBox<String> depAirports, arrAirports, airCraftsNames, crewNames;
     @FXML
     private DatePicker depTime, arrTime;
+    @FXML
+    private TableView<Flight> flightsTable;
+    @FXML
+    private TableColumn<Flight, Integer> idCol;
+    @FXML
+    private TableColumn<Flight, String> depPort;
+    @FXML
+    private TableColumn<Flight, String> arrPort;
+    @FXML
+    private TableColumn<Flight, Date> depTimeCol;
+    @FXML
+    private TableColumn<Flight, Date> arrivalTime;
+    @FXML
+    private TableColumn<Flight, String> crewCol;
+    ObservableList<Flight>listF;
     private Main mainApp;
     public String adName, adEmail;
     private int cap;
@@ -80,6 +90,17 @@ public class FlightsController {
         airPortsNames();
         crewsNames();
         airCraftsNames();
+
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        depPort.setCellValueFactory(new PropertyValueFactory<>("departureAirPort"));
+        arrPort.setCellValueFactory(new PropertyValueFactory<>("arrivalAirPort"));
+        depTimeCol.setCellValueFactory(new PropertyValueFactory<>("departureDate"));
+        arrivalTime.setCellValueFactory(new PropertyValueFactory<>("arrivalDate"));
+        crewCol.setCellValueFactory(new PropertyValueFactory<>("crewName"));
+
+        listF = FXCollections.observableArrayList(DatabaseConnector.fetchFlights());
+        flightsTable.setItems(listF);
+
     }
 
     @FXML

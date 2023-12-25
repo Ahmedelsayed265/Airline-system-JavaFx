@@ -205,7 +205,7 @@
        <TableColumn fx:id="idCol" prefWidth="58.0" text="Flight ID" />
        <TableColumn fx:id="depPort" prefWidth="102.0" text=" Dep.. Airport" />
          <TableColumn fx:id="arrPort" prefWidth="87.0" text="Arr.. Airport" />
-         <TableColumn fx:id="depTimecol" prefWidth="93.0" text="Dep.. Time " />
+         <TableColumn fx:id="depTimeCol" prefWidth="93.0" text="Dep.. Time " />
          <TableColumn fx:id="arrivalTime" prefWidth="71.0" text="Arr.. Time" />
          <TableColumn fx:id="crewCol" prefWidth="48.0" text="Crew" />
      </columns>

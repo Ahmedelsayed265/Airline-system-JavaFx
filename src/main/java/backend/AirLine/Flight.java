@@ -6,6 +6,21 @@ import java.util.ArrayList;
 public class Flight extends Model {
     private static int counter;
 
+    static {
+        try {
+            counter = DatabaseConnector.tablesCounter("aircrafts");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String departureAirPort;
+    private String arrivalAirPort;
+    private Date departureDate;
+    private Date arrivalDate;
+    private String crewName;
+
+
     public Flight(String departureAirPort, String arrivalAirPort, Date departureTime
             , Date arrivalTime, String airCraft, String crew, int availableSeats) throws Exception {
         super(++counter);
@@ -34,6 +49,14 @@ public class Flight extends Model {
         }
     }
 
+    public Flight(int id, String depAirPort, String arrAirPort, Date depDate, Date arrDate, String crewName) {
+        super(id);
+        this.departureAirPort = depAirPort;
+        this.arrivalAirPort = arrAirPort;
+        this.departureDate = depDate;
+        this.arrivalDate = arrDate;
+        this.crewName = crewName;
+    }
 
     //get aircraft capacity by using aircraft type
     public static int getAircraftCapacity(String type) throws Exception {

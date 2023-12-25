@@ -57,4 +57,14 @@ public class Crew extends People {
         return crewsNames;
     }
 
+    //get crew name by using crew ID
+    public static String getCrewName(int id) throws Exception {
+        String query = "SELECT name FROM Crews WHERE id = " + id;
+        ResultSet res = DatabaseConnector.fetchData(query);
+        if (res.next()) {
+            return res.getString("name");
+        }
+        return "";
+    }
+
 }
