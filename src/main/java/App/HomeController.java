@@ -1,5 +1,6 @@
 package App;
 
+import backend.AirLine.DatabaseConnector;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -8,6 +9,9 @@ public class HomeController {
     private Label adminNameLabel;
     @FXML
     private Label adminEmailLabel;
+
+    @FXML
+    private Label AirportsCount, AirCraftsCount, crewsCount, reservationsCount, flightsCount, passengersCount;
 
     private Main mainApp;
 
@@ -54,5 +58,15 @@ public class HomeController {
     @FXML
     public void goTickets() throws Exception {
         mainApp.showTicketsScene();
+    }
+
+    @FXML
+    public void initialize() throws Exception {
+        AirportsCount.setText(DatabaseConnector.tablesCounter("airports") + "");
+        AirCraftsCount.setText(DatabaseConnector.tablesCounter("aircrafts") + "");
+        crewsCount.setText(DatabaseConnector.tablesCounter("crews") + "");
+        reservationsCount.setText(DatabaseConnector.tablesCounter("reservations") + "");
+        flightsCount.setText(DatabaseConnector.tablesCounter("flights") + "");
+        passengersCount.setText(DatabaseConnector.tablesCounter("customers") + "");
     }
 }

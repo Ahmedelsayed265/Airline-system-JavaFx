@@ -20,30 +20,46 @@ public class DatabaseConnector {
         return stmt.executeQuery(query);
     }
 
-    public static ObservableList<Crew> fetchCrews() {
+    public static ObservableList<Crew> fetchCrews() throws SQLException {
         ObservableList<Crew> list = FXCollections.observableArrayList();
-        Connection con = null;
-
-        try {
-            con = getConnection();
-            PreparedStatement st = con.prepareStatement("SELECT * FROM crews");
-            ResultSet res = st.executeQuery();
-            while (res.next()) {
-                list.add(new Crew(res.getInt("id"), res.getString("name"), res.getString("captainName")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        Connection con = getConnection();
+        PreparedStatement st = con.prepareStatement("SELECT * FROM crews");
+        ResultSet res = st.executeQuery();
+        while (res.next()) {
+            list.add(new Crew(res.getInt("id"), res.getString("name"), res.getString("captainName")));
         }
-
         return list;
+    }
+
+    public static ObservableList<AirPort> fetchAirports() throws Exception {
+        ObservableList<AirPort> list = FXCollections.observableArrayList();
+        Connection con = getConnection();
+        PreparedStatement st = con.prepareStatement("SELECT * FROM airports");
+        ResultSet res = st.executeQuery();
+        while (res.next()) {
+            list.add(new AirPort(res.getInt("id"), res.getString("name"), res.getString("location")));
+        }
+        return list;
+    }
+
+    public static ObservableList<AirCraft> fetchAirCrafts() throws Exception {
+        ObservableList<AirCraft> list = FXCollections.observableArrayList();
+        Connection con = getConnection();
+        PreparedStatement st = con.prepareStatement("SELECT * FROM aircrafts");
+        ResultSet res = st.executeQuery();
+        while (res.next()) {
+            list.add(new AirCraft(res.getInt("id"), res.getString("type"), res.getInt("capacity")));
+        }
+        return list;
+    }
+
+    public static int tablesCounter(String table) throws Exception {
+        String query = "SELECT COUNT(*) FROM " + table;
+        ResultSet res = fetchData(query);
+        if (res.next()) {
+            return res.getInt(1);
+        }
+        return 0;
     }
 
 }

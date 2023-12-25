@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.sql.SQLException;
+
 public class CrewsController {
     @FXML
     private TableView<Crew> crewTable;
@@ -106,7 +108,7 @@ public class CrewsController {
 
     }
 
-    public void initialize() {
+    public void initialize() throws SQLException {
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         cNameCol.setCellValueFactory(new PropertyValueFactory<>("capitanName"));

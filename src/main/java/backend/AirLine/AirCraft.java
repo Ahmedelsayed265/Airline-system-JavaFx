@@ -8,6 +8,15 @@ import java.util.ArrayList;
 
 public class AirCraft extends Model {
     private static int counter;
+
+    static {
+        try {
+            counter = DatabaseConnector.tablesCounter("aircrafts");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private String airCraftType;
     private int capacity;
 
@@ -25,6 +34,12 @@ public class AirCraft extends Model {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public AirCraft(int id, String airCraftType, int capacity)  {
+        super(id);
+        this.airCraftType = airCraftType;
+        this.capacity = capacity;
     }
 
     public String getAirCraftType() {

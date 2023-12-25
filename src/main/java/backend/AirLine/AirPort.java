@@ -8,6 +8,15 @@ import java.util.ArrayList;
 
 public class AirPort extends Model {
     private static int counter;
+
+    static {
+        try {
+            counter = DatabaseConnector.tablesCounter("airports");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private String name;
     private String location;
 
@@ -25,6 +34,12 @@ public class AirPort extends Model {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public AirPort(int id, String name, String location) {
+        super(id);
+        this.name = name;
+        this.location = location;
     }
 
     public String getName() {

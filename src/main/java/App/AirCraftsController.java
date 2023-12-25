@@ -1,20 +1,29 @@
 package App;
 
 import backend.AirLine.AirCraft;
-import backend.AirLine.AirPort;
+import backend.AirLine.DatabaseConnector;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class AirCraftsController {
+    @FXML
+    private TableView<AirCraft> airCraftsTable;
+    @FXML
+    private TableColumn<AirCraft, Integer> idCol;
+    @FXML
+    private TableColumn<AirCraft, String> nameCol;
+    @FXML
+    private TableColumn<AirCraft, Integer> capacityCol;
+
     @FXML
     private Label adminNameLabel, adminEmailLabel, typeRequired, capacityRequired;
     @FXML
     private TextField type, capacity;
     private Main mainApp;
     public String adName, adEmail;
-
+    ObservableList<AirCraft> listA;
     boolean valid1 = true, valid2 = true;
 
     public void setMain(Main main) {
@@ -64,6 +73,14 @@ public class AirCraftsController {
         mainApp.showTicketsScene();
     }
 
+    public void initialize() throws Exception {
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("airCraftType"));
+        capacityCol.setCellValueFactory(new PropertyValueFactory<>("capacity"));
+        listA = DatabaseConnector.fetchAirCrafts();
+        airCraftsTable.setItems(listA);
+    }
+
     public static void infoBox(String infoMessage, String title) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText(infoMessage);
@@ -97,6 +114,8 @@ public class AirCraftsController {
                     if (valid1) {
                         AirCraft craft = new AirCraft(craftType, craftCapacity);
                         infoBox("Aircraft Added Successfully", "Success");
+                        listA.add(craft);
+                        airCraftsTable.setItems(listA);
                         type.setText(null);
                         capacity.setText(null);
                     }

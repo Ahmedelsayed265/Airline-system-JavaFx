@@ -142,4 +142,147 @@
         </Label>
         <Label fx:id="adminEmailLabel" layoutX="14.0" layoutY="529.0" text="ahmedelsayed@icloud.com" textFill="#00a4bf" />
     </AnchorPane>
+   <Label layoutX="303.0" layoutY="33.0" text="TRAVEL AGENCY AIR WAYS" textFill="#00a4bf">
+      <font>
+         <Font name="Franklin Gothic Demi Italic" size="28.0" />
+      </font>
+   </Label>
+   <AnchorPane layoutX="217.0" layoutY="90.0" prefHeight="118.0" prefWidth="253.0" style="-fx-background-color: #fff; -fx-background-radius: 4;" AnchorPane.leftAnchor="217.0">
+      <children>
+         <Label layoutX="14.0" layoutY="25.0" text="Airports" textFill="#080c53" AnchorPane.leftAnchor="14.0">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Label fx:id="AirportsCount" layoutX="14.0" layoutY="66.0" text="12" textFill="#00a4bf">
+            <font>
+               <Font name="System Bold" size="28.0" />
+            </font>
+         </Label>
+         <AnchorPane layoutX="144.0" layoutY="32.0" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #00a4bf; -fx-background-radius: 40;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <children>
+               <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="11.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="11.0">
+                  <image>
+                     <Image url="@../images/airport.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </AnchorPane>
+      </children>
+   </AnchorPane>
+   <AnchorPane layoutX="483.0" layoutY="90.0" prefHeight="118.0" prefWidth="253.0" style="-fx-background-color: #fff; -fx-background-radius: 4;" AnchorPane.rightAnchor="14.0">
+      <children>
+         <Label layoutX="14.0" layoutY="25.0" text="Air Crafts" textFill="#080c53" AnchorPane.leftAnchor="14.0">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Label fx:id="AirCraftsCount" layoutX="13.0" layoutY="66.0" text="12" textFill="#00a4bf">
+            <font>
+               <Font name="System Bold" size="28.0" />
+            </font>
+         </Label>
+         <AnchorPane layoutX="144.0" layoutY="32.0" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #00a4bf; -fx-background-radius: 40;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <children>
+               <ImageView fitHeight="58.0" fitWidth="51.0" layoutX="15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0">
+                  <image>
+                     <Image url="@../images/plane.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </AnchorPane>
+      </children>
+   </AnchorPane>
+   <AnchorPane layoutX="217.0" layoutY="230.0" prefHeight="118.0" prefWidth="253.0" style="-fx-background-color: #fff; -fx-background-radius: 4;">
+      <children>
+         <Label layoutX="14.0" layoutY="25.0" text="Crews" textFill="#080c53" AnchorPane.leftAnchor="14.0">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Label fx:id="crewsCount" layoutX="14.0" layoutY="66.0" text="124" textFill="#00a4bf">
+            <font>
+               <Font name="System Bold" size="28.0" />
+            </font>
+         </Label>
+         <AnchorPane layoutX="144.0" layoutY="32.0" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #00a4bf; -fx-background-radius: 40;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <children>
+               <ImageView fitHeight="51.0" fitWidth="47.0" layoutX="17.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="16.0">
+                  <image>
+                     <Image url="@../images/crew.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </AnchorPane>
+      </children>
+   </AnchorPane>
+   <AnchorPane layoutX="483.0" layoutY="230.0" prefHeight="118.0" prefWidth="253.0" style="-fx-background-color: #fff; -fx-background-radius: 4;">
+      <children>
+         <Label layoutX="14.0" layoutY="24.0" text="Reservation" textFill="#080c53" AnchorPane.leftAnchor="14.0">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Label fx:id="reservationsCount" layoutX="14.0" layoutY="59.0" text="60" textFill="#00a4bf">
+            <font>
+               <Font name="System Bold" size="28.0" />
+            </font>
+         </Label>
+         <AnchorPane layoutX="144.0" layoutY="32.0" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #00a4bf; -fx-background-radius: 40;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <children>
+               <ImageView fitHeight="58.0" fitWidth="64.0" layoutX="11.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="11.0">
+                  <image>
+                     <Image url="@../images/ticket.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </AnchorPane>
+      </children>
+   </AnchorPane>
+   <AnchorPane layoutX="217.0" layoutY="370.0" prefHeight="118.0" prefWidth="253.0" style="-fx-background-color: #fff; -fx-background-radius: 4;">
+      <children>
+         <Label layoutX="14.0" layoutY="25.0" text="Flights" textFill="#080c53" AnchorPane.leftAnchor="14.0">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Label fx:id="flightsCount" layoutX="14.0" layoutY="66.0" text="124" textFill="#00a4bf">
+            <font>
+               <Font name="System Bold" size="28.0" />
+            </font>
+         </Label>
+         <AnchorPane layoutX="144.0" layoutY="32.0" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #00a4bf; -fx-background-radius: 40;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <children>
+               <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="17.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="9.0">
+                  <image>
+                     <Image url="@../images/flights.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </AnchorPane>
+      </children>
+   </AnchorPane>
+   <AnchorPane layoutX="483.0" layoutY="370.0" prefHeight="118.0" prefWidth="253.0" style="-fx-background-color: #fff; -fx-background-radius: 4;">
+      <children>
+         <Label layoutX="14.0" layoutY="25.0" text="Passengers" textFill="#080c53" AnchorPane.leftAnchor="14.0">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Label fx:id="passengersCount" layoutX="14.0" layoutY="66.0" text="2000" textFill="#00a4bf">
+            <font>
+               <Font name="System Bold" size="28.0" />
+            </font>
+         </Label>
+         <AnchorPane layoutX="144.0" layoutY="32.0" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #00a4bf; -fx-background-radius: 40;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <children>
+               <ImageView fitHeight="51.0" fitWidth="58.0" layoutX="15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0">
+                  <image>
+                     <Image url="@../images/passengers.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </AnchorPane>
+      </children>
+   </AnchorPane>
 </AnchorPane>
