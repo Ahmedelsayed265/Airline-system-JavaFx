@@ -8,6 +8,13 @@ import java.util.ArrayList;
 
 public class Crew extends People {
     private static int counter;
+    static {
+        try {
+            counter = DatabaseConnector.tablesCounter("crews");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     private String capitanName;
 
     public Crew(String name, String capitanName) {
@@ -27,7 +34,7 @@ public class Crew extends People {
     }
 
     public Crew(int id ,String name , String cName) {
-        super(++counter , name);
+        super(id , name);
         this.capitanName = cName;
     }
 
