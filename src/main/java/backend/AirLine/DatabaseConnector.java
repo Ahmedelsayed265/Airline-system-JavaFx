@@ -14,12 +14,14 @@ public class DatabaseConnector {
         return DriverManager.getConnection(DB_URL, USER, PASSWORD);
     }
 
+    // global function to fetch data by query
     public static ResultSet fetchData(String query) throws Exception {
         Connection connection = getConnection();
         Statement stmt = connection.createStatement();
         return stmt.executeQuery(query);
     }
 
+    // tables functions
     public static ObservableList<Crew> fetchCrews() throws SQLException {
         ObservableList<Crew> list = FXCollections.observableArrayList();
         Connection con = getConnection();
@@ -95,7 +97,6 @@ public class DatabaseConnector {
         return list;
     }
 
-
     public static ObservableList<Ticket> fetchTickets() throws Exception {
         ObservableList<Ticket> list = FXCollections.observableArrayList();
         Connection con = getConnection();
@@ -112,6 +113,7 @@ public class DatabaseConnector {
         return list;
     }
 
+    // method to get the count of table rows in database
     public static int tablesCounter(String table) throws Exception {
         String query = "SELECT COUNT(*) FROM " + table;
         ResultSet res = fetchData(query);

@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TicketsController {
+    // ----- Table View ----- //
     @FXML
     private Label adminNameLabel, adminEmailLabel;
     @FXML
@@ -21,6 +22,7 @@ public class TicketsController {
     @FXML
     private TableColumn<Ticket, Boolean> status;
     ObservableList<Ticket> listTickets;
+    // ----------------------- //
     private Main mainApp;
     public String adName, adEmail;
 
@@ -28,6 +30,7 @@ public class TicketsController {
         this.mainApp = main;
     }
 
+    // ----- set Admin Information in side bar -----//
     @FXML
     public void setAdminInfo(String adminEmail, String adminName) {
         adName = adminName;
@@ -36,6 +39,7 @@ public class TicketsController {
         adminEmailLabel.setText(adminEmail);
     }
 
+    // ----- pages Navigations ----- //
     @FXML
     public void goHome() throws Exception {
         mainApp.showHomeScene(adEmail, adName);
@@ -70,7 +74,9 @@ public class TicketsController {
     public void goReservations() throws Exception {
         mainApp.showReservationsScene();
     }
+    // ----------------------- //
 
+    // ---- Initialize table view columns ----//
     @FXML
     public void initialize() throws Exception {
         //table view

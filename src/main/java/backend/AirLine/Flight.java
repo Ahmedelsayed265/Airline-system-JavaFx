@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Flight extends Model {
     private static int counter;
-
     static {
         try {
             counter = DatabaseConnector.tablesCounter("flights");

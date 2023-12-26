@@ -17,6 +17,7 @@ public class Crew extends People {
     }
     private String capitanName;
 
+    // main constructor
     public Crew(String name, String capitanName) {
         super(++counter, name);
         this.capitanName = capitanName;
@@ -32,7 +33,7 @@ public class Crew extends People {
             throw new RuntimeException(e);
         }
     }
-
+    // custom constructor for tables view
     public Crew(int id ,String name , String cName) {
         super(id , name);
         this.capitanName = cName;
@@ -46,6 +47,7 @@ public class Crew extends People {
         this.capitanName = capitanName;
     }
 
+    // method to list names in combobox
     public static ArrayList<String> fetchCrewsNames() throws Exception {
         ArrayList<String> crewsNames = new ArrayList<>();
         String query = "SELECT name FROM crews";

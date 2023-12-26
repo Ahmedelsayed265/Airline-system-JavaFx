@@ -13,12 +13,10 @@ public class LoginController {
     @FXML
     private PasswordField passwordInput;
     @FXML
-    private Label emailRequiredLabel;
-    @FXML
-    private Label passwordRequiredLabel;
+    private Label emailRequiredLabel, passwordRequiredLabel;
     private Main mainApp;
-    public String adminEmail;
-    public String adminName;
+    public String adminEmail, adminName;
+
     boolean validationFailed = false;
 
     public void setMain(Main mainApp) {

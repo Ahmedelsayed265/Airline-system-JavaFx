@@ -8,6 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class AirPortsController {
+    // ----- Table View ----- //
+
     @FXML
     private TableView<AirPort> airportsTable;
     @FXML
@@ -16,6 +18,10 @@ public class AirPortsController {
     private TableColumn<AirPort, String> nameCol;
     @FXML
     private TableColumn<AirPort, String> locationCol;
+    ObservableList<AirPort> listA;
+
+    // ----------------------- //
+
     @FXML
     private Label adminNameLabel, adminEmailLabel, locationRequiredLabel, nameRequiredLabel;
     @FXML
@@ -23,12 +29,12 @@ public class AirPortsController {
     private Main mainApp;
     public String adName, adEmail;
     boolean valid1 = true, valid2 = true;
-    ObservableList<AirPort> listA;
 
     public void setMain(Main main) {
         this.mainApp = main;
     }
 
+    // ----- set Admin Information in side bar -----//
     @FXML
     public void setAdminInfo(String adminEmail, String adminName) {
         adName = adminName;
@@ -37,6 +43,7 @@ public class AirPortsController {
         adminEmailLabel.setText(adminEmail);
     }
 
+    // ----- pages Navigations ----- //
     @FXML
     public void goLogin() throws Exception {
         mainApp.showLoginScene();
@@ -71,7 +78,9 @@ public class AirPortsController {
     public void goTickets() throws Exception {
         mainApp.showTicketsScene();
     }
+    // ----------------------- //
 
+    // ----- Add Airport Form ----- //
     @FXML
     public void addAirport() {
         String name = airPortName.getText();
@@ -101,7 +110,9 @@ public class AirPortsController {
             airPortLocation.setText(null);
         }
     }
+    // ----------------------- //
 
+    // ---- Initialize table view columns ----//
     public void initialize() throws Exception {
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -109,6 +120,7 @@ public class AirPortsController {
         listA = DatabaseConnector.fetchAirports();
         airportsTable.setItems(listA);
     }
+
     public static void infoBox(String infoMessage, String title) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText(infoMessage);

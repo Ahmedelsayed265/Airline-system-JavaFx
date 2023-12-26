@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.SQLException;
 
 public class CrewsController {
+    // ----- Table View ----- //
     @FXML
     private TableView<Crew> crewTable;
     @FXML
@@ -18,24 +19,28 @@ public class CrewsController {
     private TableColumn<Crew, String> nameCol;
     @FXML
     private TableColumn<Crew, String> cNameCol;
+    ObservableList<Crew> listC;
+    // ----------------------- //
     @FXML
     private TextField crewName, captainName;
     @FXML
-    private Label crewRequired, captainRequired;
-    @FXML
-    private Label adminNameLabel;
-    @FXML
-    private Label adminEmailLabel;
+    private Label crewRequired, captainRequired, adminNameLabel, adminEmailLabel;
     private Main mainApp;
     public String adName, adEmail;
     boolean valid1, valid2;
-
-    ObservableList<Crew> listC;
 
     public void setMain(Main main) {
         this.mainApp = main;
     }
 
+    // ----- set Admin Information in side bar -----//
+    @FXML
+    public void setAdminInfo(String adminEmail, String adminName) {
+        adminNameLabel.setText(adminName);
+        adminEmailLabel.setText(adminEmail);
+    }
+
+    // ----- pages Navigations ----- //
     @FXML
     public void goLogin() throws Exception {
         mainApp.showLoginScene();
@@ -71,12 +76,9 @@ public class CrewsController {
         mainApp.showTicketsScene();
     }
 
-    @FXML
-    public void setAdminInfo(String adminEmail, String adminName) {
-        adminNameLabel.setText(adminName);
-        adminEmailLabel.setText(adminEmail);
-    }
+    // ----------------------- //
 
+    // ----- Add Crew Form ----- //
     @FXML
     public void addCrew() {
         String crew = crewName.getText();
@@ -100,14 +102,17 @@ public class CrewsController {
         if (valid1 && valid2) {
             Crew cr = new Crew(crew, captain);
             infoBox("Crew Added Successfully", "Success");
+            // update table
             listC.add(cr);
             crewTable.setItems(listC);
+            // reset form
             crewName.setText(null);
             captainName.setText(null);
         }
 
     }
 
+    // ---- Initialize table view columns ----//
     public void initialize() throws SQLException {
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));

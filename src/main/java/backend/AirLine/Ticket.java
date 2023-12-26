@@ -10,7 +10,7 @@ public class Ticket extends Model {
     private int customerId;
     private String customerName;
     private boolean paymentStatus;
-
+    // main constructors
     public Ticket(int reservationId, int customerId, boolean paymentStatus) {
         super(++counter);
         this.reservationId = reservationId;
@@ -28,6 +28,7 @@ public class Ticket extends Model {
             throw new RuntimeException(e);
         }
     }
+    // custom constructor
     public Ticket(int id, int reservationId ,String customerName, boolean paymentStatus){
         super(id);
         this.reservationId = reservationId;

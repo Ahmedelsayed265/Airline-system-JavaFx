@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class AirCraft extends Model {
     private static int counter;
-
     static {
         try {
             counter = DatabaseConnector.tablesCounter("aircrafts");
@@ -20,6 +19,7 @@ public class AirCraft extends Model {
     private String airCraftType;
     private int capacity;
 
+    // main constructor
     public AirCraft(String airCraftType, int capacity) {
         super(++counter);
         this.airCraftType = airCraftType;
@@ -36,6 +36,7 @@ public class AirCraft extends Model {
         }
     }
 
+    // custom constructor for table view
     public AirCraft(int id, String airCraftType, int capacity)  {
         super(id);
         this.airCraftType = airCraftType;
@@ -58,6 +59,7 @@ public class AirCraft extends Model {
         this.capacity = capacity;
     }
 
+    // get names for comboBox
     public static ArrayList<String> fetchAirCraftsNames() throws Exception {
         ArrayList<String> airCraftsNames = new ArrayList<>();
         String query = "SELECT type FROM Aircrafts";
@@ -68,5 +70,4 @@ public class AirCraft extends Model {
         }
         return airCraftsNames;
     }
-    //add addAirCraft - editAirCraft - deleteAirCraft - displayAirCraft
 }

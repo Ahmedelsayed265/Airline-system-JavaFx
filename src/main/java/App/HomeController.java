@@ -6,25 +6,20 @@ import javafx.scene.control.Label;
 
 public class HomeController {
     @FXML
-    private Label adminNameLabel;
-    @FXML
-    private Label adminEmailLabel;
-
-    @FXML
-    private Label AirportsCount, AirCraftsCount, crewsCount, reservationsCount, flightsCount, passengersCount;
-
+    private Label adminNameLabel, adminEmailLabel, AirportsCount,
+            AirCraftsCount, crewsCount, reservationsCount, flightsCount, passengersCount;
     private Main mainApp;
 
     public void setMain(Main main) {
         this.mainApp = main;
     }
-
+    // ----- set Admin Information in side bar -----//
     @FXML
     public void setAdminInfo(String adminEmail, String adminName) {
         adminNameLabel.setText(adminName);
         adminEmailLabel.setText(adminEmail);
     }
-
+    // ----- pages Navigations ----- //
     @FXML
     public void goLogin() throws Exception {
         mainApp.showLoginScene();

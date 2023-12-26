@@ -4,7 +4,6 @@ import java.sql.*;
 
 public class Reservation extends Model {
     private static int counter;
-
     static {
         try {
             counter = DatabaseConnector.tablesCounter("reservations");
@@ -16,19 +15,10 @@ public class Reservation extends Model {
     private int adminId;
     private String adminName;
     private int flightId;
-
-    public String getAdminName() {
-        return adminName;
-    }
-
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
-    }
-
     private int seatNumber;
     private Date reservationDate;
     private double price;
-
+    // main constructor
     public Reservation(int adminId, int flightId, int seatNumber, Date reservationDate, double price) {
         super(++counter);
         this.adminId = adminId;
@@ -51,7 +41,7 @@ public class Reservation extends Model {
             throw new RuntimeException(e);
         }
     }
-
+    // custom constructor
     public Reservation(int id, String adminName, int flightId, int seatNumber, Date reservationDate, double price) {
         super(id);
         this.adminName = adminName;
@@ -67,6 +57,14 @@ public class Reservation extends Model {
 
     public void setAdminId(int adminId) {
         this.adminId = adminId;
+    }
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
     }
 
     public int getFlightId() {
@@ -110,5 +108,4 @@ public class Reservation extends Model {
         }
         return 0;
     }
-
 }

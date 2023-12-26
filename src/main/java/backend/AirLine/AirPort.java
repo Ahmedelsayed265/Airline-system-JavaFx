@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class AirPort extends Model {
     private static int counter;
-
     static {
         try {
             counter = DatabaseConnector.tablesCounter("airports");
@@ -16,10 +15,10 @@ public class AirPort extends Model {
             throw new RuntimeException(e);
         }
     }
-
     private String name;
     private String location;
 
+    // main constructor
     public AirPort(String name, String location) {
         super(++counter);
         this.name = name;
@@ -36,6 +35,7 @@ public class AirPort extends Model {
         }
     }
 
+    // custom constructor for table view
     public AirPort(int id, String name, String location) {
         super(id);
         this.name = name;
@@ -58,6 +58,7 @@ public class AirPort extends Model {
         this.location = location;
     }
 
+    // method for list names in combobox
     public static ArrayList<String> fetchAirportsNames() throws Exception {
         ArrayList<String> airportNames = new ArrayList<>();
         String query = "SELECT name FROM Airports";

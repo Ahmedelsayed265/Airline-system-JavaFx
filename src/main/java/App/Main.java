@@ -19,6 +19,7 @@ public class Main extends Application {
         showLoginScene();
     }
 
+    // method for showing Scenes for all pages by View.fxml
     private FXMLLoader sceneShow(String nameView, String stageTitle) throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(nameView));
         Scene scene = new Scene(loader.load(), 750, 560);
@@ -43,18 +44,17 @@ public class Main extends Application {
         controller.setMain(this);
         primaryStage.show();
     }
-
     //-------------------**------------------------//
-    public HomeController homeController;
+
     public String adName, adEmail;
 
     public void showHomeScene(String adminEmail, String adminName) throws Exception {
         adName = adminName;
         adEmail = adminEmail;
         FXMLLoader loader = sceneShow("Home-view.fxml", "Home");
-        homeController = loader.getController();
-        homeController.setMain(this);
-        homeController.setAdminInfo(adminEmail, adminName);
+        HomeController controller = loader.getController();
+        controller.setMain(this);
+        controller.setAdminInfo(adminEmail, adminName);
         primaryStage.show();
     }
 

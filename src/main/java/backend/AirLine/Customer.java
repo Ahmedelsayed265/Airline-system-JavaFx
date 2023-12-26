@@ -9,6 +9,7 @@ public class Customer extends People {
     private static  int counter;
     private String phoneNumber;
 
+    // main constructor
     public Customer(String name, String phoneNumber) {
         super(++counter, name);
         this.phoneNumber = phoneNumber;
@@ -41,7 +42,7 @@ public class Customer extends People {
         }
         return 0;
     }
-
+    //get customer name by using customer id
     public static String getCustomerName(int id) throws Exception {
         String query = "SELECT name FROM Customers WHERE id = " + id;
         ResultSet res = DatabaseConnector.fetchData(query);

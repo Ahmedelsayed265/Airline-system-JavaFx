@@ -11,14 +11,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class FlightsController {
-    @FXML
-    private Label adminNameLabel, adminEmailLabel, seats;
-    @FXML
-    private Label arrAirportSelected, depAirportSelected, aircraftSelected, depTimeRequired, arrTimeRequired, crewSelected;
-    @FXML
-    private ComboBox<String> depAirports, arrAirports, airCraftsNames, crewNames;
-    @FXML
-    private DatePicker depTime, arrTime;
+    // ----- Table View ----- //
     @FXML
     private TableView<Flight> flightsTable;
     @FXML
@@ -34,6 +27,14 @@ public class FlightsController {
     @FXML
     private TableColumn<Flight, String> crewCol;
     ObservableList<Flight> listF;
+    // ----------------------- //
+    @FXML
+    private Label arrAirportSelected, depAirportSelected, aircraftSelected,
+            adminNameLabel, adminEmailLabel, seats, depTimeRequired, arrTimeRequired, crewSelected;
+    @FXML
+    private ComboBox<String> depAirports, arrAirports, airCraftsNames, crewNames;
+    @FXML
+    private DatePicker depTime, arrTime;
     private Main mainApp;
     public String adName, adEmail;
     private int cap;
@@ -42,6 +43,7 @@ public class FlightsController {
         this.mainApp = main;
     }
 
+    // ----- set Admin Information in side bar -----//
     @FXML
     public void setAdminInfo(String adminEmail, String adminName) {
         adName = adminName;
@@ -50,6 +52,7 @@ public class FlightsController {
         adminEmailLabel.setText(adminEmail);
     }
 
+    // ----- pages Navigations ----- //
     @FXML
     public void goLogin() throws Exception {
         mainApp.showLoginScene();
@@ -84,7 +87,9 @@ public class FlightsController {
     public void goTickets() throws Exception {
         mainApp.showTicketsScene();
     }
+    // ----------------------- //
 
+    // ----- list the Airports names in ComboBox method ---- //
     @FXML
     public void airPortsNames() throws Exception {
         ArrayList<String> airports = AirPort.fetchAirportsNames();
@@ -93,6 +98,7 @@ public class FlightsController {
         arrAirports.setItems(comboBoxItems);
     }
 
+    // ----- list the AirCraft names in ComboBox method ---- //
     @FXML
     public void airCraftsNames() throws Exception {
         ArrayList<String> airCrafts = AirCraft.fetchAirCraftsNames();
@@ -100,6 +106,7 @@ public class FlightsController {
         airCraftsNames.setItems(comboBoxItems);
     }
 
+    // ----- list the Crews names in ComboBox method ---- //
     @FXML
     public void crewsNames() throws Exception {
         ArrayList<String> crews = Crew.fetchCrewsNames();
@@ -107,12 +114,14 @@ public class FlightsController {
         crewNames.setItems(comboBoxItems);
     }
 
+    // ----- this method shows the available sates in airCraft --- //
     @FXML
     public void getCapacity() throws Exception {
         cap = Flight.getAircraftCapacity(airCraftsNames.getValue());
         seats.setText(String.valueOf(cap));
     }
 
+    // ----- Add Flight Form ----- //
     @FXML
     public void addFlight() throws Exception {
         String depAirport = depAirports.getValue();
@@ -186,6 +195,7 @@ public class FlightsController {
         }
     }
 
+    // ---- Initialize table view columns and ComboBoxes ----//
     @FXML
     public void initialize() throws Exception {
         airPortsNames();

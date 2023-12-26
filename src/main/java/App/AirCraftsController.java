@@ -8,6 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class AirCraftsController {
+    // ----- Table View ----- //
+
     @FXML
     private TableView<AirCraft> airCraftsTable;
     @FXML
@@ -16,6 +18,9 @@ public class AirCraftsController {
     private TableColumn<AirCraft, String> nameCol;
     @FXML
     private TableColumn<AirCraft, Integer> capacityCol;
+    ObservableList<AirCraft> listA;
+
+    // ----------------------- //
 
     @FXML
     private Label adminNameLabel, adminEmailLabel, typeRequired, capacityRequired;
@@ -23,13 +28,14 @@ public class AirCraftsController {
     private TextField type, capacity;
     private Main mainApp;
     public String adName, adEmail;
-    ObservableList<AirCraft> listA;
+
     boolean valid1 = true, valid2 = true;
 
     public void setMain(Main main) {
         this.mainApp = main;
     }
 
+    // ----- set Admin Information in side bar -----//
     @FXML
     public void setAdminInfo(String adminEmail, String adminName) {
         adName = adminName;
@@ -38,6 +44,7 @@ public class AirCraftsController {
         adminEmailLabel.setText(adminEmail);
     }
 
+    // ----- pages Navigations ----- //
     @FXML
     public void goLogin() throws Exception {
         mainApp.showLoginScene();
@@ -72,22 +79,9 @@ public class AirCraftsController {
     public void goTickets() throws Exception {
         mainApp.showTicketsScene();
     }
+    // ----------------------- //
 
-    public void initialize() throws Exception {
-        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("airCraftType"));
-        capacityCol.setCellValueFactory(new PropertyValueFactory<>("capacity"));
-        listA = DatabaseConnector.fetchAirCrafts();
-        airCraftsTable.setItems(listA);
-    }
-
-    public static void infoBox(String infoMessage, String title) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText(infoMessage);
-        alert.setTitle(title);
-        alert.show();
-    }
-
+    // ----- Add Airport Form ----- //
     public void addAirCraft() {
         String craftType = type.getText();
         String capacityText = capacity.getText();
@@ -125,5 +119,21 @@ public class AirCraftsController {
                 valid2 = false;
             }
         }
+    }
+
+    // ---- Initialize table view columns ----//
+    public void initialize() throws Exception {
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("airCraftType"));
+        capacityCol.setCellValueFactory(new PropertyValueFactory<>("capacity"));
+        listA = DatabaseConnector.fetchAirCrafts();
+        airCraftsTable.setItems(listA);
+    }
+
+    public static void infoBox(String infoMessage, String title) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText(infoMessage);
+        alert.setTitle(title);
+        alert.show();
     }
 }

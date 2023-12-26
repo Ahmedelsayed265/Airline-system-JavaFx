@@ -9,14 +9,14 @@ public class Admin extends Model {
     private static boolean login;
     private String password;
 
-
+    // main constructor
     public Admin(String name, String emailAddress, String password) {
         super(++counter);
         this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;
     }
-
+    // custom constructor for login - register controllers
     public Admin() {
         super(++counter);
     }

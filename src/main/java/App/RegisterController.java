@@ -9,18 +9,11 @@ import javafx.scene.control.TextField;
 
 public class RegisterController {
     @FXML
-    private Label nameRequired;
+    private Label nameRequired, emailRequired, passwordRequired;
     @FXML
-    private Label emailRequired;
-    @FXML
-    private Label passwordRequired;
-    @FXML
-    private TextField nameInput;
-    @FXML
-    private TextField emailInput;
+    private TextField nameInput, emailInput;
     @FXML
     private PasswordField passwordInput;
-
     boolean validationFailed = false;
     private Main mainApp;
 
@@ -65,7 +58,6 @@ public class RegisterController {
                 mainApp.showLoginScene();
             } else {
                 errorBox("Email address is already exist..!", "Validation Error");
-
             }
         }
     }
