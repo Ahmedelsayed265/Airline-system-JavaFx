@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class AirCraftsController {
-    // ----- Table View ----- //
+
 
     @FXML
     private TableView<AirCraft> airCraftsTable;
